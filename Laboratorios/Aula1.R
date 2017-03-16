@@ -4,45 +4,46 @@ knitr::opts_chunk$set(echo = TRUE)
 library(datasets)
 # Abrindo um data frame desse pacote
 data("mtcars")
-# Abrindo informaÃ§Ãµes sobre o data frame (resumo, codebook, etc.)
+# Abrindo informaçõees sobre o data frame (resumo, codebook, etc.)
 ?mtcars
 # Visualizando o data frame
 View(mtcars)
-# Visualizando as primeiras seis observaÃ§Ãµes do data frame
+# Visualizando as primeiras seis observações do data frame
 head(mtcars)
-# Visualizando a estruruda dos dados, ou seja, quantas observaÃ§Ãµes, variÃ¡veis, tipo de variÃ¡vel...
+# Visualizando a estruruda dos dados, ou seja, quantas observações, variáveis, tipo de variável...
 str(mtcars)
-# Mostrar o nÃºmero de linhas
+# Mostrar o número de linhas
 nrow(mtcars)
-# Mostrar o nÃºmero de colunas
+# Mostrar o número de colunas
 ncol(mtcars)
-# Mostrar o nÃºmero de linhas e colunas, necessariamente nesta ordem
+# Mostrar o número de linhas e colunas, necessariamente nesta ordem
 dim(mtcars)
-# Visualizar o nome das variÃ¡veis
+# Visualizar o nome das variáveis
 names(mtcars)
-# Editar uma funÃ§Ã£o, no caso "head" para alterar o nÃºmero de observaÃ§Ãµes apresentadas
+# Editar uma função, no caso "head" para alterar o número de observações apresentadas
 head(x = mtcars, n = 10)
-# Mesmo da anterior, indicando a nÃ£o necessidade de escrever "x" e "n", quando conhecida a ordem
+# Mesmo da anterior, indicando a não necessidade de escrever "x" e "n", quando conhecida a ordem, ainda que aconselhável para
+## manter claro e não arriscar cometer erros por errar a ordem reconhecida pela linguagem
 head(mtcars, 10)
 # Limpando o ambiente de trabalho
 rm(mtcars)
 
-# Iniciando a construÃ§Ã£o de um data frame com informaÃ§Ãµes de notÃ­cias
+# Iniciando a construção de um data frame com informações de notícias
 # Criando vetor com o nome dos jornais
-jornal <- c("Folha de SÃ£o Paulo", "Folha de SÃ£o Paulo", "Folha de SÃ£o Paulo", "El PaÃ­s", "El PaÃ­s", "El PaÃ­s")
-# Criando vetor com a data das notÃ­cias
+jornal <- c("Folha de SÃ£o Paulo", "Folha de SÃ£o Paulo", "Folha de SÃ£o Paulo", "El País", "El País", "El País")
+# Criando vetor com a data das notícias
 date <- c("13/03/2017", "13/03/2017", "13/03/2017", "12/03/2017", "12/03/2017", "12/03/2017")
-# Criando vetor com os tÃ­tulos das notÃ­cias
-titulo <- c("Em meio Ã  crise, governo Temer aumenta investimento militar em 35%", "'Lista de Janot' deve ter pedidos para 80 inquÃ©ritos ao Supremo", "Ã espera de delaÃ§Ãµes, Temer lanÃ§a mÃ£o de estratÃ©gia para sobreviver atÃ© 2018", "TensÃ£o toma conta de BrasÃ­lia com iminente divulgaÃ§Ã£o da 'delaÃ§Ã£o do fim do mundo'", "DelaÃ§Ãµes da Odebrecht: o que jÃ¡ se sabe e o que mais elas podem conter", "âNa Venezuela nÃ£o hÃ¡ comida, mas no Brasil simâ: a nova fuga da fome na fronteira do norte")
+# Criando vetor com os títulos das notícias
+titulo <- c("Em meio à  crise, governo Temer aumenta investimento militar em 35%", "'Lista de Janot' deve ter pedidos para 80 inquéritos ao Supremo", "À espera de delações, Temer lança mão de estratégia para sobreviver até 2018", "Tensão toma conta de Brasília com iminente divulgação da 'delação do fim do mundo'", "Delações da Odebrecht: o que já se sabe e o que mais elas podem conter", "'Na Venezuela não há comida, mas no Brasil sim': a nova fuga da fome na fronteira do norte")
 # Criando vetor com o nome dos autores
-autor <- c("Igor Gielow e Gustavo Patu", "LetÃ­cia Casado", "Leandro Colon", "Talita Bedinelli", "N/A", "Marina Rossi")
-# Criando vetor com o nÃºmero de caracteres
+autor <- c("Igor Gielow e Gustavo Patu", "Letícia Casado", "Leandro Colon", "Talita Bedinelli", "NA", "Marina Rossi")
+# Criando vetor com o número de caracteres
 caracteres <- c(1653, 985, 1124, 868, 1021, 1780)
-# Criando vetor com classificaÃ§Ã£o binÃ¡ria de conteÃºdo de polÃ­tica: 1 sim e 0 nÃ£o
+# Criando vetor com classificação binária de conteúdo de política: 1 sim e 0 não
 politica <- c(1, 1, 1, 1, 1, 1)
-# Criando vetor com classificaÃ§Ã£o binÃ¡ria de conteÃºdo de esportes: 1 sim e 0 nÃ£o
+# Criando vetor com classificação binária de conteúdo de esportes: 1 sim e 0 não
 esportes <- c(0, 0, 0, 0, 0, 0)
-# Criando vetor indicando a presenÃ§a de vÃ­deo na matÃ©ria: "ContÃ©m vÃ­deo"
+# Criando vetor indicando a presençaa de vídeo na matéria: "Contém vídeo"
 video <- c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
 # Observando os objetos criados no workspace
 ls()
@@ -59,7 +60,7 @@ length(esportes)
 length(video)
 # Criando o data frame compilando os vetores
 dados <- data.frame(jornal, date, titulo, autor, caracteres, politica, esportes, video)
-# Como o data frame atribui automaticamente o nome dos vetores Ã s variÃ¡veis, Ã© possÃ­vel alterar o nome
+# Como o data frame atribui automaticamente o nome dos vetores às variáves, caso desejado pode-se alterar o nome
 dados1 <- data.frame(newspaper = jornal,
                      date = date,
                      title = titulo,
@@ -74,18 +75,17 @@ names(dados)
 # Observando as dimensÃµes
 dim(dados)
 
-# Removendo os vetores
-rm(author, autor, caracteres, date, esportes, jornal, politica, title, titulo, video)
+# Tipos de dados em R e vetores
 
-# Tipos de ddaos em R e vetores
-# Doubles: guardar nÃºmeros, como o vetor caracteres criado
+# Doubles: guardar números, como o vetor caracteres criado
 # Vendo o tipo de vetor criado
 typeof(caracteres)
-# Realizando operaÃ§Ãµes com o vetor
+# Realizando operaçõees com o vetor
 caracteres + 1
 caracteres * 2
 sum(caracteres)
-# Logicals: possibilidade de classificar variÃ¡veis binÃ¡rias com FALSE (F) ou TRUE (T) e nÃ£o como double, 0 e 1
+
+# Logicals: possibilidade de classificar variáveis binárias com FALSE (F) ou TRUE (T) e não como double, 0 e 1
 typeof(politica)
 typeof(esportes)
 typeof(video)
@@ -96,21 +96,28 @@ sum(video)
 typeof(jornal)
 typeof(titulo)
 
-# Abrindo bases externas
-votacao_candidato_munzona_2014_AC <- read.table("~/Downloads/votacao_candidato_munzona_2014_AC.txt", sep = ";", fileEncoding="latin1")
+# Abrindo bases externas.
+# Aqui abriremos a base de dados com a votação nominal por município e zona no Acre em 2014
+# Para importar, cria-se um data frame a partir da leitura do arquivo txt indicando o caminho no computador, no caso, a pasta "Downloads"
+votacao_candidato_munzona_2014_AC <- read.table("~/Downloads/votacao_candidato_munzona_2014_AC.txt", 
+                                                sep = ";", fileEncoding="latin1")
 
-# ExercÃ­cios
-#1- Quantas linhas e quantas colunas tÃªm o data frame votacao_candidato_munzona_2014_AC? Use as funÃ§Ãµes que vocÃª aprendeu no tutorial.
+# Exercícios
+#1- Quantas linhas e quantas colunas tem o data frame votacao_candidato_munzona_2014_AC? Use as funções que você aprendeu no tutorial.
 dim(votacao_candidato_munzona_2014_AC)
-#2- Observe as 4 primeiras linhas do data frame com o comando head (sÃ³ as 4 primeiras).
+
+#2- Observe as 4 primeiras linhas do data frame com o comando head (só as 4 primeiras).
 head(votacao_candidato_munzona_2014_AC, 4)
+
 #3- Use o comando str para examinar o data frame.
 str(votacao_candidato_munzona_2014_AC)
 
-# CadÃª o nome das variÃ¡veis
+# Qual o nome das variÃ¡veis?
 names(votacao_candidato_munzona_2014_AC)
+  # Aqui é necessário o codebook para identificação de cada uma das variáveis
+
 # Colunas como vetores
-  # Como nÃ£o Ã© um objeto no ambiente de trabalho, nÃ£o Ã© possÃ­vel usar de forma direta
+  # Como não é um objeto no ambiente de trabalho, não é possível usar de forma direta
 mean(V29)
-  # Assim Ã© preciso especificar o data frame de origem
+  # Assim é preciso especificar o data frame de origem
 mean(votacao_candidato_munzona_2014_AC$V29)
