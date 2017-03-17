@@ -72,4 +72,14 @@ as.character(sexo)
 sexo
 attributes(sexo)
 
-# Coerção
+# Coerção do R
+  # Se um vetor atômico contém uma "character string", o R converterá todos os outros valores em "character string"
+  # Se contém "logicals" e "doubles", converterá as "logicals" em números (1 verdadeiro e 0 falso)
+    # As mesmas regras de coerção se aplicam quando se tentar realizar operações matemáticas com valores "logicals"
+sum(c(TRUE, TRUE, TRUE, FALSE, TRUE))
+    # Como no exemplo, 4 indica o total de TRUE e a média representa a proporção de TRUEs
+  # Por que é útil? 
+    # Isto auxilia na preservação de informações
+    # Da mesma forma, vetores, matrizes e arranjos tornam a matemática mais fácil para bases com muitos dados, além de mais rápidas
+
+# Listas
