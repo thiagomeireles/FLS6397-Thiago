@@ -98,4 +98,9 @@ naipe <- c("Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas
 valor <- c(13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 baralho <- data.frame(carta, naipe, valor)
 
-# Carregando Dados
+# Importando Dados
+library(readr)
+> baralho <- read_csv("C:/Users/dcplab/Downloads/baralho.csv", 
+                      +     col_types = cols(carta = col_character(), 
+                                             +         naipe = col_character(), valor = col_double()))
+> View(baralho)
