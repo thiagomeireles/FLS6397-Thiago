@@ -82,4 +82,9 @@ sum(c(TRUE, TRUE, TRUE, FALSE, TRUE))
     # Isto auxilia na preservação de informações
     # Da mesma forma, vetores, matrizes e arranjos tornam a matemática mais fácil para bases com muitos dados, além de mais rápidas
 
-# Listas
+# Listas: são como vetores atômicos por agrupar dados de forma unidimensional. No entanto, agrupam objetos do R, como vetores e outras listas, e não informações individuais
+  # São um tipo básico de objeto no R, como vetores atômicos, utilziaodos para contruir blocos e criar objetos mais sofisticados.
+list1 <- list(100:130, "R", list(TRUE, FALSE))
+list1
+
+# Data Frames:
