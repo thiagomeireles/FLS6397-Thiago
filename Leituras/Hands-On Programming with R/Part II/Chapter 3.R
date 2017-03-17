@@ -87,4 +87,15 @@ sum(c(TRUE, TRUE, TRUE, FALSE, TRUE))
 list1 <- list(100:130, "R", list(TRUE, FALSE))
 list1
 
-# Data Frames:
+# Data Frames:  é uma versão bidimensional de uma lista, algo como o equivalente de uma planilha .xlsx.
+  # Eles agrupam vetores em uma tabela bidimensional, com cada vetor se tornando uma coluna. Dessa forma, cada coluna pode se tornar um tipo diferente de dados, mas dentro de cada coluna eles devem ser do mesmto tipo.
+  # Também é necessário que cada vetor possua o mesmo tamanho (ou se utilizar de regras de reciclagem do R)
+  # Se observar o dataframe, terá uma lista, sendo que, de fato, cada data frame é uma lista com a classe data.frame
+    # Vamos construir o baralho da forma mais difícil?
+carta <- c("Rei", "Dama", "Valete", "Dez", "Nove", "Oito", "Sete", "Seis", "Cinco", "Quatro", "Três", "Dois", "Um", "Rei", "Dama", "Valete", "Dez", "Nove", "Oito", "Sete", "Seis", "Cinco", "Quatro", "Três", "Dois", "Um", "Rei", "Dama", "Valete", "Dez", "Nove", "Oito", "Sete", "Seis", "Cinco", "Quatro", "Três", "Dois", "Um", "Rei", "Dama", "Valete", "Dez", "Nove", "Oito", "Sete", "Seis", "Cinco", "Quatro", "Três", "Dois", "Um")
+naipe <- c("Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas", "Copas",
+           "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Espadas", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Ouros", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus", "Paus")
+valor <- c(13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+baralho <- data.frame(carta, naipe, valor)
+
+# Carregando Dados
