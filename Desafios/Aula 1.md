@@ -6,14 +6,18 @@ data("mtcars")
 
 * Q1
 * Original
+
 ~~H~~ead(mtcars)
 
 *Correção: A linguagem R é sens?vel a mudanças entre maiúsculas e minúsculas, "Head" deve ser "head"*
+
 head(mtcars)
 
 * Q2)
 * Original
+
 str(~~M~~tcars)
+
 * Correção: Mesmo caso da Q1, "Mtcars" é "mtcars"
 str(mtcars)
 
