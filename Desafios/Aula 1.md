@@ -1,4 +1,4 @@
-<p style="__Desafio 1__: center;">
+<p style="__Desafio 1__: center;"></p>
 
 *Antes de iniciar a correção dos primeiros comandos é necessário carregar a base de dados "mtcars" presente na biblioteca de banco de dados "datasets"*
 ```
