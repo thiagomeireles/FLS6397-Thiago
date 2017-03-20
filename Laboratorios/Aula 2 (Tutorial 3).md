@@ -31,6 +31,7 @@ Os operadores relacionais também valem para textos!!!
 "texto" != "texto"
 ```
 Observando o segundo exemplo, vemos mais uma vez que o R é "case sensitive", diferenciando maiúsculas e minúsculas
+
 *Textos também podem ser ordenados*
 ```
 "a" > "b"
@@ -39,12 +40,14 @@ Observando o segundo exemplo, vemos mais uma vez que o R é "case sensitive", di
 "A" > "a"
 ```
 Aqui vemos que quanto mais para o final do alfabeto, maior; bem como maiúscula maior que minúscula
+
 *A regra se aplica inclusive entre entre palavras inteiras*
 ```
 "cachorro" < "cachorro quente"
 "churrasco de gato" >  "cachorro quente"
-      # Aqui vemos a mesma lógica
 ```
+Aqui vemos a mesma lógica
+
 *E para valores lógicos?*
 ```
 TRUE == 1
@@ -52,6 +55,7 @@ FALSE == 0
 TRUE > FALSE
 ```
 As "logicals" são variáveis binárias que assumem valor 0 e 1 para F e T respectivamente
+
 *Também é possível estabelecer operações relacionais com vetores*
 ```
 x <- 5
@@ -66,7 +70,9 @@ x > y
 votos16 <- c(1030, 551, 992, 345, 203, 2037)
 votos16 >= 1000
 ```
-Da mesma forma, compara os valores entre dois vetores. O exemplo compara os votos dos mesmos candidatos para 2012 e 2016
+Da mesma forma, compara os valores entre dois vetores.
+
+*O exemplo compara os votos dos mesmos candidatos para 2012 e 2016*
 ```
 votos12 <- c(890, 354, 950, 400, 50, 3416)
 votos16 > votos12
