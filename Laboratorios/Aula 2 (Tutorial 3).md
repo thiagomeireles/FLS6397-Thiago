@@ -2,17 +2,14 @@
 
 **Operadores relacionais**
 
-Igual: "==" 
-
-Diferente: "!="
-
-Maior:">" 
-
-Maior ou igual: ">="
-
-Menor: "<"
-
-Menor ou igual: "<="
+| Operador       | Símbolo |
+| -------------- |:-------:| 
+| Igual          | ==      |
+| Diferente      | !=      |
+| Maior          | >       |
+| Maior ou igual | >=      |
+| Menor          | <       |
+| Menor ou igual | <=      |
 
 *Exemplos*
 ```
@@ -77,11 +74,11 @@ votos16 > votos12
 
 **Operadores lógicos (Booleanos)**
 
-"E": &
-
-"OU": |
-
-"NÃO": !
+| Operador | Símbolo |
+| -------- |:-------:| 
+| E        | &       |
+| Ou       | \|      |
+| Não      | !       |
 
 *Seguindo os dados do exemplo anterior, podemos verificar todos os candidatos que obtivaram acima de 500 (exclusive) E abaixo de 1500 (inclusive) votos*
 ```
