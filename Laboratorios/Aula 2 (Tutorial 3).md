@@ -271,6 +271,7 @@ A ideia de utilizar loops está na economia de tempo com a automatização de ta
 
 
 **Escrevendo funções**
+
 Após nos familiarizarmos com diversas funções da linguagem R, chegou a hora de pensar na construção de nossas próprias funções
 
 *Como exemplo, criaremos uma função para conversão de Farenheit para Celsius"
