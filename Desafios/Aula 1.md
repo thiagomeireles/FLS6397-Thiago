@@ -1,19 +1,20 @@
 __Desafio 1__
 
-1. Antes de iniciar a correção dos primeiros comandos é necessário carregar a base de dados "mtcars" presente na biblioteca de banco de dados "datasets"
+* Antes de iniciar a correção dos primeiros comandos é necessário carregar a base de dados "mtcars" presente na biblioteca de banco de dados "datasets"
 library(datasets)
 data("mtcars")
 
-# Q1)
-# Original
-~~Head(mtcars)~~
-# Correção: A linguagem R é sens?vel a mudanças entre maiúsculas e minúsculas, "Head" deve ser "head"
+* Q1
+* Original
+~~H~~ead(mtcars)
+
+*Correção: A linguagem R é sens?vel a mudanças entre maiúsculas e minúsculas, "Head" deve ser "head"*
 head(mtcars)
 
-# Q2)
-#Original
-str(Mtcars)
-#Correção: Mesmo caso da Q1, "Mtcars" é "mtcars"
+* Q2)
+* Original
+str(~~M~~tcars)
+* Correção: Mesmo caso da Q1, "Mtcars" é "mtcars"
 str(mtcars)
 
 # Q3)
