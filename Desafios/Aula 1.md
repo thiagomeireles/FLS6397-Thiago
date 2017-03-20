@@ -1,11 +1,12 @@
 __Desafio 1__
 
-* Antes de iniciar a correção dos primeiros comandos é necessário carregar a base de dados "mtcars" presente na biblioteca de banco de dados "datasets"
+*Antes de iniciar a correção dos primeiros comandos é necessário carregar a base de dados "mtcars" presente na biblioteca de banco de dados "datasets"*
+```
 library(datasets)
 data("mtcars")
-
-* Q1
-* Original
+```
+Q1
+*Original*
 ```
 ~~H~~ead(mtcars)
 ```
@@ -13,12 +14,12 @@ data("mtcars")
 ```
 head(mtcars)
 ```
-* Q2)
-* Original
+Q2)
+Original
 ```
 str(~~M~~tcars)
 ```
-* Correção: Mesmo caso da Q1, "Mtcars" é "mtcars"
+Correção: Mesmo caso da Q1, "Mtcars" é "mtcars"
 ```
 str(mtcars)
 ```
