@@ -337,214 +337,352 @@ min(litros_cafe)
 ```
 quantile(litros_cafe, probs = c(0, 0.25, 0.5, 0.75, 1))
 ```
-***Todas as funções retornam vetores atômicos, exceto quantis, no qual podemos estabelecer os que queremos observar***
+*Todas as funções retornam vetores atômicos, exceto quantis, no qual podemos estabelecer os que queremos observar*
 ```
 quantile(litros_cafe, probs = c(0, 0.2, 0.4, 0.5, 0.6, 0.8, 1))
 ```
 
 
-# Exercício: Com os seus próprios exemplos do exercício acima (palavras e litros de café por mês), use 6 funções acima.
-  # Palavras
-    # Soma
-sum(palavras)
-      #[1] 18894
-    # Média
-mean((palavras))
-      #[1] 3149
-    # Desvio-padrão
-sd(palavras)
-      # [1] 1574.141
-    # Variância
-var(palavras)
-      # [1] 2477920
-    # Mediana
-median(palavras)
-      # [1] 3050.5
-    # Valor máximo
-max(palavras)
-      # [1] 5413
-    # Valor mínimo
-min(palavras)
-[1] 1258
-    # Quantis
-quantile(palavras, probs = c(0, 0.25, 0.5, 0.75, 1))
-      # 0%           25%       50%      75%       100% 
-      # 1258.00   2003.75   3050.50   4113.00   5413.00
-  # Café
-    # Soma
-sum(cafe)
-      # [1] 21    
-    # Média
-mean(cafe)
-    # Desvio-padrão
-      # [1] 3.5
-    # Variância
-var(cafe)
-      # [1] 2.7
-    # Mediana
-median(cafe)
-      # [1] 3.5
-    # Valor máximo
-max(cafe)
-      #[1] 6
-    # Valor mínimo
-min(cafe)
-      # [1] 1
-    # Quantis
-quantile(cafe, probs = c(0, 0.25, 0.5, 0.75, 1))
-      # 0%     25%    50%    75%    100% 
-      # 1.0    3.0    3.5    4.0    6.0
+**Exercício**
 
-# Subconjunto vetores (Parte II)
-  # Selecionaremos para quais meses o consumo de café foi acima de 7 litros
+Com os seus próprios exemplos do exercício acima (palavras e litros de café por mês), use 6 funções acima.
+*Palavras*
+Soma
+```
+sum(palavras)
+#[1] 18894
+```
+Média
+```
+mean((palavras))
+#[1] 3149
+```
+Desvio-padrão
+```
+sd(palavras)
+# [1] 1574.141
+```
+Variância
+```
+var(palavras)
+# [1] 2477920
+```
+Mediana
+```
+median(palavras)
+# [1] 3050.5
+```
+Valor máximo
+```
+max(palavras)
+# [1] 5413
+```
+Valor mínimo
+```
+min(palavras)
+# [1] 1258
+```
+Quantis
+```
+quantile(palavras, probs = c(0, 0.25, 0.5, 0.75, 1))
+# 0%           25%       50%      75%       100% 
+# 1258.00   2003.75   3050.50   4113.00   5413.00
+```
+
+*Café*
+Soma
+```
+sum(cafe)
+# [1] 21    
+```
+Média
+```
+mean(cafe)
+```
+Desvio-padrão
+```
+sd(cafe)
+# [1] 3.5
+```
+Variância
+```
+var(cafe)
+# [1] 2.7
+```
+Mediana
+```
+median(cafe)
+# [1] 3.5
+```
+Valor máximo
+```
+max(cafe)
+#[1] 6
+```
+Valor mínimo
+``` 
+min(cafe)
+# [1] 1
+```
+Quantis
+```
+quantile(cafe, probs = c(0, 0.25, 0.5, 0.75, 1))
+# 0%     25%    50%    75%    100% 
+# 1.0    3.0    3.5    4.0    6.0
+```
+
+
+**Subconjunto vetores (Parte II)**
+  
+Selecionaremos para quais meses o consumo de café foi acima de 7 litros
+```
 meses <- c("Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", 
            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro")
 names(litros_cafe) <- meses
 selecao <- litros_cafe > 7
 litros_cafe[selecao]
-    # Ainda que pareça uma operação simples, para bancos de dados com muitas informações isto se torna bastante útil
+```
+*Ainda que pareça uma operação simples, para bancos de dados com muitas informações isto se torna bastante útil*
 
-# Factros e Variáveis categóricas
-  # Factor é, basicamente, a classe de vetores em R utilizada para lidar com dados categóricos, nominais ou ordinais
-    # Utilizaremos uma variável que só assuma valores "sim" e "não"
+**Factros e Variáveis categóricas**
+
+Factor é, basicamente, a classe de vetores em R utilizada para lidar com dados categóricos, nominais ou ordinais
+*Utilizaremos uma variável que só assuma valores "sim" e "não"*
+```
 yes_no <- c("sim", "nao", "nao", "nao", "sim", "nao")
 print(yes_no)
 class(yes_no)
-    # Utilizaremos a função "factor" para criar o vetor f_yes_no
+```
+Utilizaremos a função "factor" para criar o vetor f_yes_no
+```
 f_yes_no <- factor(yes_no)
 f_yes_no
-    # Basicamente, "factors" são vetores numéricos cujos valores estão associados a um rótulo. Os "levels" são esses pares de código numérico + rótulo.
-    # Podemos tentar transformar os valores em números
+```
+Basicamente, "factors" são vetores numéricos cujos valores estão associados a um rótulo. Os "levels" são esses pares de código numérico + rótulo.
+*Podemos tentar transformar os valores em números*
+```
 as.numeric(f_yes_no)
-      # 1 e 2 representam os valores gerados automaticamente para não e sim, utilizando ordem alfabética
-    # Também podemos observar os níveis
+```
+*1 e 2 representam os valores gerados automaticamente para não e sim, utilizando ordem alfabética*
+
+*Também podemos observar os níveis*
+```
 levels(f_yes_no)
-      # Da mesma forma, podemos alterá-los como fazemos com a função "names"    
+```
+*Da mesma forma, podemos alterá-los como fazemos com a função "names"*
+```
 levels(f_yes_no) <- c("No", "Yes")
 print(f_yes_no)
+```
 
-  # E se os valores forem ordenados?
+**E se os valores forem ordenados?**
+```
 tamanho <- c("alto", "baixo", "baixo", "medio", "alto", "baixo", "medio")
 f_tamanho <- factor(tamanho)
 print(f_tamanho)
-    # Como segue a ordem alfabética, alto = 1, baixo = 2 e médio = 3
-      # Se tentamos observar se existe ordem, encontramos que não
+```
+Como segue a ordem alfabética, alto = 1, baixo = 2 e médio = 3. Se tentamos observar se existe ordem, encontramos que não
+```
 f_tamanho[1]
 f_tamanho[2]
 f_tamanho[1] > f_tamanho[2]
 f_tamanho > "medio"
-          # Para ordená-los é preciso utilizar argumentos adicionais
+```
+*Para ordená-los é preciso utilizar argumentos adicionais*
+```
 f_tamanho <- factor(tamanho, order = T, levels <- c("baixo", "medio", "alto"))
 print(f_tamanho)
-    # Agora a ordem segue o que indicamos
+```
+Agora a ordem segue o que indicamos
+```
 f_tamanho[1]
 f_tamanho[2]
 f_tamanho[1] > f_tamanho[2]
 f_tamanho > "medio"
+```
 
-# Exercício
-  # Crie um vetor de texto com categorias não ordenáveis.
+
+**Exercício**
+
+Crie um vetor de texto com categorias não ordenáveis.
+```
 colors <- c("azul", "amarelo", "branco", "vermelho", "verde")
-  # Crie um vetor de fatores a partir do vetor do item anterior.
+```
+Crie um vetor de fatores a partir do vetor do item anterior.
+```
 f_colors <- factor(colors)
 f_colors
-      # [1] azul     amarelo  branco   vermelho verde   
-      # Levels: amarelo azul branco verde vermelho
-    # Por curiosidade, veremos os valores atribuídos a cada uma das cores
+# [1] azul     amarelo  branco   vermelho verde   
+# Levels: amarelo azul branco verde vermelho
+```
+*Por curiosidade, veremos os valores atribuídos a cada uma das cores*
+```
 as.numeric(f_colors)
-      # [1] 2 1 3 5 4
-  # Traduza os níveis para o inglês (ou para o português se já estiverem em inglês)
+# [1] 2 1 3 5 4
+```
+Traduza os níveis para o inglês (ou para o português se já estiverem em inglês)
+```
 levels(f_colors) <- c("blue", "yellow", "white", "red", "green")
 f_colors
-      # [1] yellow blue   white  green  red   
-      # Levels: blue yellow white red green
-    # Também observaremos os valores atribuídos
+# [1] yellow blue   white  green  red   
+# Levels: blue yellow white red green
+```
+*Também observaremos os valores atribuídos*
+```
 as.numeric(f_colors)
-      # [1] 2 1 3 5 4
-        # Elas se mantém porque o vetor é criado a partir da ordem estabelecida em português
-  # Crie um vetor de texto com categorias ordenáveis.
+# [1] 2 1 3 5 4
+```
+*Elas se mantém porque o vetor é criado a partir da ordem estabelecida em português*
+Crie um vetor de texto com categorias ordenáveis.
+```
 aval_atendimento <- c("ótimo", "bom", "regular", "ruim", "péssimo")
-  # Crie um vetor de fatores a partir do vetor do item anterior.
+```
+Crie um vetor de fatores a partir do vetor do item anterior.
+```
 f_aval_atendimento <- factor(aval_atendimento, order = T, c("péssimo", "ruim", "regular", "bom", "ótimo"))
 f_aval_atendimento
-  # Compare dois elementos do vetor criado no item anterior
+```
+Compare dois elementos do vetor criado no item anterior
+```
 f_aval_atendimento[1]
 f_aval_atendimento[2]
 f_aval_atendimento[1] > f_aval_atendimento[2]
 f_aval_atendimento > "regular"
+```
 
-# Matrizes
-  # Matriz seguindo a distribuição por linha
+
+**Matrizes**
+
+Matriz seguindo a distribuição por linha
+```
 matrix(1:9, byrow = TRUE, nrow = 3)
-  # Matriz seguindo a distribuição por coluna
+```
+Matriz seguindo a distribuição por coluna
+```
 matrix(1:9, byrow = FALSE, nrow = 3)
-  # Gerando matrizes a partir de vetores
-    # Observamos os vetores...
+```
+Gerando matrizes a partir de vetores
+*Observamos os vetores...*
+```
 beatriz <- c(4, 5, 0, 3, 5)
 pedro <- c(2, 2, 2, 2, 2)
 mateus <- c(0, 0, 12, 0, 0)
-    # Criamos um novo vetor unindo os vetores anteriores...
+```
+*Criamos um novo vetor unindo os vetores anteriores...*
+```
 vetor_cafe <- c(beatriz, pedro, mateus)
-    # Para, enfim, criar a matriz distribuindo as informações dos vetores iniciais em coluna
+```
+*Para, enfim, criar a matriz distribuindo as informações dos vetores iniciais em coluna*
+```
 cafe <- matrix(vetor_cafe, byrow = FALSE, nrow = 5)
 print(cafe)
-    # Podemos atribuir nomes às margens da matriz
+```
+*Podemos atribuir nomes às margens da matriz*
+```
 fregueses <- c("Beatriz", "Pedro", "Mateus")
 dias_uteis <- c("Segunda", "Terca", "Quarta", "Quinta", "Sexta")
 rownames(cafe) <- dias_uteis
 colnames(cafe) <- fregueses
 print(cafe)
-    # Existe uma forma de gerar a matriz já com os nomes atribuídos com o argumento "dimnames"
+```
+*Existe uma forma de gerar a matriz já com os nomes atribuídos com o argumento "dimnames"*
+```
 cafe <- matrix(vetor_cafe, byrow = FALSE, nrow = 5,
                dimnames = list(dias_uteis, fregueses))
 print(cafe)
-    # Se quisermos alterar as linhas e colunas basta usar a função "t"
+```
+*Se quisermos alterar as linhas e colunas basta usar a função "t"*
+```
 t(cafe)
-    # Se quisermos unir os vetores originais como se fossem colunas, a função "cbind"
+```
+*Se quisermos unir os vetores originais como se fossem colunas, a função "cbind"*
+```
 cbind(beatriz, pedro, mateus)
-    # A função "rbind" faz o mesmo tratando os vetores como linhas
+```
+*A função "rbind" faz o mesmo tratando os vetores como linhas*
+```
 rbind(beatriz, pedro, mateus)
-    # Para somar os valores nas linhas e colunas usa-se, respectivamente, "rowSums" e "colSums"
+```
+*Para somar os valores nas linhas e colunas usa-se, respectivamente, "rowSums" e "colSums"*
+```
 rowSums(cafe)
 colSums(cafe)
-    # É possível gerar os totais nas margens da matriz utilizando as funções de soma e combinação
+```
+*É possível gerar os totais nas margens da matriz utilizando as funções de soma e combinação*
+```
 Total_Coluna <- colSums(cafe)
 cafe2 <- rbind(cafe, Total_Coluna)
 Total_Linha <- rowSums(cafe2)
 cafe2 <- cbind(cafe2, Total_Linha)
 print(cafe2)
-    # Assim como aplicado a vetores, é possível realizar operações matemáticas
+```
+*Assim como aplicado a vetores, é possível realizar operações matemáticas*
+```
 cafe / 3.2
-    # Como também é possível realizar operações com matrizes com as mesmas dimensões
+```
+*Como também é possível realizar operações com matrizes com as mesmas dimensões*
+```
 matrix(1:9, byrow = TRUE, nrow = 3) + matrix(1:9, byrow = FALSE, nrow = 3)
-  # Tudo isso foi realizado para conseguir entender como se seleciona subconjuntos da matriz
-    #Selecionar toda a segunda coluna:
+```
+*Tudo isso foi realizado para conseguir entender como se seleciona subconjuntos da matriz*
+Selecionar toda a segunda coluna:
+```
 cafe[, 2]
-    # Selecionar toda a terceira linha:
+```
+Selecionar toda a terceira linha:
+```
 cafe[3, ]
-    # Selecionar o elemento da linha 1 e coluna 3:
+```
+Selecionar o elemento da linha 1 e coluna 3:
+```
 cafe[1, 3]
-    # Selecionar os elementos 4 e 5 da coluna 1:
+```
+Selecionar os elementos 4 e 5 da coluna 1:
+```
 cafe[4:5, 1]
-    #Selecionar os elementos 1, 3 e 5 da coluna 3:
+```
+Selecionar os elementos 1, 3 e 5 da coluna 3:
+```
 cafe[c(1,3,5), 3]
-    # Selecionar o elemento 4 das colunas 2 e 3:
+```
+Selecionar o elemento 4 das colunas 2 e 3:
+```
 cafe[4, 2:3]
-    # Selecionar a segunda e terça-feira de Pedro:
+```
+Selecionar a segunda e terça-feira de Pedro:
+```
 cafe[c("Segunda", "Terca"), "Pedro"]
-    # Selecionar a quarta-feira de todos:
+```
+Selecionar a quarta-feira de todos:
+```
 cafe["Quarta",]
+```
 
-# Exercício: Subconjunto de matrizes são fundamentais para o futuro do curso. Seja criativ@ e faça 6 exemplos seus com a matriz "cafe" com a qual trabalhamos.
-  # Observar o consumo de café de Pedro ao longo da semana, consumo constante de 2 por dia
+
+**Exercício**
+
+Subconjunto de matrizes são fundamentais para o futuro do curso. Seja criativ@ e faça 6 exemplos seus com a matriz "cafe" com a qual trabalhamos.
+*Observar o consumo de café de Pedro ao longo da semana, consumo constante de 2 por dia*
+```
 cafe[,2]
-  # Observar o consumo de café na quarta-feira, observando grande variação
+```
+*Observar o consumo de café na quarta-feira, observando grande variação*
+```
 cafe [3,]
-  # Mateus parece ter concentrado seu consumo em apenas um dia, vejamos:
+```
+*Mateus parece ter concentrado seu consumo em apenas um dia, vejamos:*
+```
 cafe[,3]
-  # De fato, todo seu consumo foi na quarta-feira
+```
+*De fato, todo seu consumo foi na quarta-feira*
+```
 cafe[3,3]
-  # Beatriz é quem mais consume café, mas como é distribuído?
+```
+*Beatriz é quem mais consume café, mas como é distribuído?*
+```
 cafe[,1]
-  # Ao contrário de Mateus, Beatriz somente não consumiu café na quarta-feira
+```
+*Ao contrário de Mateus, Beatriz somente não consumiu café na quarta-feira*
+```
 cafe[3,1]
+```
