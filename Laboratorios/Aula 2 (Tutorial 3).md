@@ -286,7 +286,8 @@ conversor(32)
 É intuitivo observar que a função construída tem seus argumentos  (inseridos no parênteses após "function") e o corpo da função (utiliza os argumentos para realizar a tarefa).
  
 
-**Exercício:**
+**Exercícios**
+
 *Crie uma função chamada "quadrado" que recebe um número "x" e retorna o quadrado de x.*
 ```
 quadrado <- function(x){
