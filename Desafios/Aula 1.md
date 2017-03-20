@@ -1,4 +1,4 @@
-<p style="__Desafio 1__: center;"></p>
+**Desafio 1**
 
 *Antes de iniciar a correção dos primeiros comandos é necessário carregar a base de dados "mtcars" presente na biblioteca de banco de dados "datasets"*
 ```
@@ -22,7 +22,7 @@ str(Mtcars)
 str(mtcars)
 ```
 
-Q3)
+**Q3)**
 ```
 dim[mtcars]
 ```
@@ -31,7 +31,7 @@ dim[mtcars]
 dim(mtcars)
 ```
 
-Q4)
+**Q4)**
 ```
 nomes(mtcars)
 ```
@@ -40,7 +40,7 @@ nomes(mtcars)
 names(mtcars)
 ```
 
-Q5)
+**Q5)**
 ```
 head(mtcars, x = 10)
 ```
@@ -52,7 +52,7 @@ head(x= mtcars, 10)
 head(mtcars, 10)
 ```
 
-Q6)
+**Q6)**
 ```
 v1 <- ("pato", "cachorro", "minhoca", "lagarto")
 ```
@@ -61,7 +61,7 @@ v1 <- ("pato", "cachorro", "minhoca", "lagarto")
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 ```
 
-Q7)
+**Q7)**
 ```
 v2 <- c("1", "2", "3", "4")
 v1 + 42
@@ -75,7 +75,7 @@ v2 <- c(1, 2, 3, 4)
 v2 + 42
 ```
 
-Q8)
+**Q8)**
 ```
 v1 <- c("pato", "cachorro", "minhoca", "lagarto"
 ```
@@ -84,7 +84,7 @@ v1 <- c("pato", "cachorro", "minhoca", "lagarto"
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 ```
 
-Q9)
+**Q9)**
 ```
 v3 <- c(33 31 40 25 27 40)
 ```
@@ -93,7 +93,7 @@ v3 <- c(33 31 40 25 27 40)
 v3 <- c(33, 31, 40, 25, 27, 40)
 ```
 
-Q10)
+**Q10)**
 ```
 v1 <- c(pato, cachorro, minhoca, lagarto)
 ```
@@ -102,7 +102,7 @@ v1 <- c(pato, cachorro, minhoca, lagarto)
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 ```
 
-Q11)
+**Q11)**
 ```
 v1 <- c("pato" "cachorro" "minhoca" "lagarto")
 ```
@@ -111,14 +111,14 @@ v1 <- c("pato" "cachorro" "minhoca" "lagarto")
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 ```
 
-Q12)
+**Q12)**
 ```
 v3 <- C(33, 31, 40, 25, 27, 40)
 ```
 *Correção: Erro na diferenciação entre maiúsculas e minúsculas, como indicado em Q1 e Q2*
 v3 <- c(33, 31, 40, 25, 27, 40)
 
-Q13)
+**Q13)**
 ```
 v1 <- c("pato", "cachorro"", "minhoca", "lagarto")
 v3 <- c(33, 31, 40, 25, 27, 40)
@@ -134,7 +134,7 @@ v3 <- c(33, 31, 40, 25)
 myData <- data.frame(v1, v3)
 ```
 
-Q14)
+**Q14)**
 ```
 v1 <- c("pato", "cachorro"", "minhoca", "lagarto")
 v4 <- c(33, 31, 40, 25)
@@ -154,7 +154,7 @@ idade <- c(33, 31, 40, 25)
 myData2 <- data.frame(animais, idade)
 ```
 
-Q15)
+**Q15)**
 ```
 ls
 ```
@@ -165,7 +165,7 @@ ls(mtcars)
 ls(myData)
 ```
 
-Q16)
+**Q16)**
 ```
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 sum(v1)
