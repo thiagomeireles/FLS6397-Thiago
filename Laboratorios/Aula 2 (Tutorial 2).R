@@ -398,3 +398,17 @@ cafe[4, 2:3]
 cafe[c("Segunda", "Terca"), "Pedro"]
     # Selecionar a quarta-feira de todos:
 cafe["Quarta",]
+
+# Exercício: Subconjunto de matrizes são fundamentais para o futuro do curso. Seja criativ@ e faça 6 exemplos seus com a matriz "cafe" com a qual trabalhamos.
+  # Observar o consumo de café de Pedro ao longo da semana, consumo constante de 2 por dia
+cafe[,2]
+  # Observar o consumo de café na quarta-feira, observando grande variação
+cafe [3,]
+  # Mateus parece ter concentrado seu consumo em apenas um dia, vejamos:
+cafe[,3]
+  # De fato, todo seu consumo foi na quarta-feira
+cafe[3,3]
+  # Beatriz é quem mais consume café, mas como é distribuído?
+cafe[,1]
+  # Ao contrário de Mateus, Beatriz somente não consumiu café na quarta-feira
+cafe[3,1]
