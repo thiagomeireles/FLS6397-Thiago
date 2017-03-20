@@ -54,7 +54,7 @@ rm(mtcars)
 ```
 
 
-*Iniciando a construção de um data frame com informações de notícias*
+**Iniciando a construção de um data frame com informações de notícias**
 
 Criando vetor com o nome dos jornais
 ```
@@ -93,7 +93,7 @@ Observando os objetos criados no workspace
 ls()
 ```
 
-*Criando um data frame a partir dos vetores*
+**Criando um data frame a partir dos vetores**
 
 Verificando se os vetores possuem o mesmo comprimento
 ```
@@ -137,6 +137,7 @@ dim(dados)
 
 
 **Tipos de dados em R e vetores**
+
 *Doubles:* guardar números, como o vetor caracteres criado
 Vendo o tipo de vetor criado
 ```
@@ -187,8 +188,11 @@ head(votacao_candidato_munzona_2014_AC, 4)
 3- Use o comando str para examinar o data frame.
 ```
 str(votacao_candidato_munzona_2014_AC)
+```
 4- Qual o nome das variáveis?
+```
 names(votacao_candidato_munzona_2014_AC)
+```
 *Aqui é necessário o codebook para identificação de cada uma das variáveis*
 
 **Colunas como vetores**
