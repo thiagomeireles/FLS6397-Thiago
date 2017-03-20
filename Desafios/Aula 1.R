@@ -11,7 +11,7 @@ head(mtcars)
 # Q2)
 #Original
 str(Mtcars)
-#Correção: Mesmo caso da Q1, "Mtcars" ? "mtcars"
+#Correção: Mesmo caso da Q1, "Mtcars" é "mtcars"
 str(mtcars)
 
 # Q3)
