@@ -177,6 +177,7 @@ votacao_candidato_munzona_2014_AC <- read.table("~/Downloads/votacao_candidato_m
 
 
 **Exercícios**
+
 1- Quantas linhas e quantas colunas tem o data frame votacao_candidato_munzona_2014_AC? Use as funções que você aprendeu no tutorial.
 ```
 dim(votacao_candidato_munzona_2014_AC)
@@ -196,6 +197,7 @@ names(votacao_candidato_munzona_2014_AC)
 *Aqui é necessário o codebook para identificação de cada uma das variáveis*
 
 **Colunas como vetores**
+
 Como não é um objeto no ambiente de trabalho, não é possível usar de forma direta
 ```
 mean(V29)
