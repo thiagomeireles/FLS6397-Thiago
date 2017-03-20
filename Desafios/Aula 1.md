@@ -6,7 +6,7 @@ data("mtcars")
 
 # Q1)
 # Original
-Head(mtcars)
+~~Head(mtcars)~~
 # Correção: A linguagem R é sens?vel a mudanças entre maiúsculas e minúsculas, "Head" deve ser "head"
 head(mtcars)
 
