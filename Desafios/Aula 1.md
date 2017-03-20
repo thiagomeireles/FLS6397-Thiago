@@ -7,15 +7,15 @@ data("mtcars")
 ```
 Q1)
 ```
-~~H~~ead(mtcars)
+Head(mtcars)
 ```
-* *Correção: A linguagem R é sens?vel a mudanças entre maiúsculas e minúsculas, "Head" deve ser "head"*
+* *Correção: A linguagem R é sensível a mudanças entre maiúsculas e minúsculas, "Head" deve ser "head"*
 ```
 head(mtcars)
 ```
 Q2)
 ```
-str(~~M~~tcars)
+str(Mtcars)
 ```
 *Correção: Mesmo caso da Q1, "Mtcars" é "mtcars"*
 ```
@@ -24,7 +24,7 @@ str(mtcars)
 
 Q3)
 ```
-dim~~[~~mtcars~~]~~
+dim[mtcars]
 ```
 *Correção: Da mesma forma que maiúsculas e minúsculas, chaves e aspas possuem diferenciação na linguagem*
 ```
@@ -33,7 +33,7 @@ dim(mtcars)
 
 Q4)
 ```
-n~~o~~mes(mtcars)
+nomes(mtcars)
 ```
 *Correção: O comando está errado pela língua, deve ser em inglês "names"*
 ```
@@ -42,7 +42,7 @@ names(mtcars)
 
 Q5)
 ```
-head(mtcars, ~~x~~ = 10)
+head(mtcars, x = 10)
 ```
 *Correção: Aqui são distintas as possibilidades de correção, o erro está nos elementos da função pois é composta por "head(x, n), sendo 10 o n, não x.*
 ```
@@ -54,7 +54,7 @@ head(mtcars, 10)
 
 Q6)
 ```
-v1 <- ~~("pato", "cachorro", "minhoca", "lagarto")~~
+v1 <- ("pato", "cachorro", "minhoca", "lagarto")
 ```
 *Correção: É preciso definir a atribuição dos valores ao vetor com "c('valores')", no caso entre aspas por ser uma variável "character", além da separação por vírgulas necessária para qualquer vetor*
 ```
@@ -63,8 +63,8 @@ v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 
 Q7)
 ```
-v2 <- c~~("1", "2", "3", "4")~~
-~~v1~~ + 42
+v2 <- c("1", "2", "3", "4")
+v1 + 42
 ```
 *Correção: Ao contrário das variáveis "character" nas quais se coloca aspas para delimitar os valores os vetores de variáveis numéricas (no caso, uma double) so definidos apenas pela separação em vírgula*
 ```
@@ -77,7 +77,7 @@ v2 + 42
 
 Q8)
 ```
-v1 <- c~~("pato", "cachorro", "minhoca", "lagarto"~~
+v1 <- c("pato", "cachorro", "minhoca", "lagarto"
 ```
 *Correção: Para delimitar o vetor é necessário fechar os parênteses*
 ```
@@ -86,7 +86,7 @@ v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 
 Q9)
 ```
-v3 <- c~~(33 31 40 25 27 40)~~
+v3 <- c(33 31 40 25 27 40)
 ```
 *Correção: Como explicado em Q7, é necessário separar os valores atribuídos a vetores numérico apenas por vírgulas*
 ```
@@ -95,7 +95,7 @@ v3 <- c(33, 31, 40, 25, 27, 40)
 
 Q10)
 ```
-v1 <- c~~(pato, cachorro, minhoca, lagarto)~~
+v1 <- c(pato, cachorro, minhoca, lagarto)
 ```
 *Correção: Necessárias as aspas para cada valor, como indicado em Q6*
 ```
@@ -104,7 +104,7 @@ v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 
 Q11)
 ```
-v1 <- c~~("pato" "cachorro" "minhoca" "lagarto")~~
+v1 <- c("pato" "cachorro" "minhoca" "lagarto")
 ```
 *Correção: Necessária a inclusão das vírgulas entre os valores indicados*
 ```
@@ -113,15 +113,15 @@ v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 
 Q12)
 ```
-v3 <- ~~C~~(33, 31, 40, 25, 27, 40)
+v3 <- C(33, 31, 40, 25, 27, 40)
 ```
 *Correção: Erro na diferenciação entre maiúsculas e minúsculas, como indicado em Q1 e Q2*
 v3 <- c(33, 31, 40, 25, 27, 40)
 
 Q13)
 ```
-v1 <- c("pato", "cachorro"~~"~~, "minhoca", "lagarto")
-v3 <- c(33, 31, 40, 25~~, 27, 40~~)
+v1 <- c("pato", "cachorro"", "minhoca", "lagarto")
+v3 <- c(33, 31, 40, 25, 27, 40)
 myData <- data.frame(v1, v3)
 ```
 *Correção: Erros de digitação, como uma aspa a mais, quebram a leitura do código*
@@ -136,16 +136,16 @@ myData <- data.frame(v1, v3)
 
 Q14)
 ```
-v1 <- c("pato", "cachorro"~~"~~, "minhoca", "lagarto")
+v1 <- c("pato", "cachorro"", "minhoca", "lagarto")
 v4 <- c(33, 31, 40, 25)
-myData <- ~~data.frame(v1 = animal, v4 = idade)~~
+myData <- data.frame(v1 = animal, v4 = idade)
 ```
 *Correção: Na primeira linha, erro de digitação com uma aspa a mais; para criar o data frame ou se usa o v1, v4 e se atribui o nome das variáveis às colunas*
 ```
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 v4 <- c(33, 31, 40, 25)
 myData <- data.frame(v1, v4)
-colnames(myData) <- c("animais", "idade)
+colnames(myData) <- c("animais", "idade")
 ```
 *Ou cria-se vetores com os nomes utilizados*
 ```
@@ -167,7 +167,7 @@ ls(myData)
 
 Q16)
 ```
-v1 <- c(~~"pato", "cachorro", "minhoca", "lagarto"~~)
+v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 sum(v1)
 ```
 *Correção: O comando "sum" soma os valores atribuídos ao vetor. Como a variável é nominal/character esta não é uma propriedade aplicável, diferente de v3 ou v4, por exemplo*
