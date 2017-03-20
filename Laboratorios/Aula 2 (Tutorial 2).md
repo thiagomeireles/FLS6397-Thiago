@@ -212,6 +212,7 @@ soma_semanas <- semana_1 + semana_2
 print(soma_semanas)
 ```
 Também podemos criar um vetir com as informações das duas semanas
+```
 duas_semanas <- c(semana_1, semana_2)
 print(duas_semanas)
 ```
