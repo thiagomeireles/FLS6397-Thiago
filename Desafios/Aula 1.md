@@ -173,5 +173,5 @@ sum(v1)
 *Correção: O comando "sum" soma os valores atribuídos ao vetor. Como a variável é nominal/character esta não é uma propriedade aplicável, diferente de v3 ou v4, por exemplo*
 ```
 v4 <- c(33, 31, 40, 25)
-```
 sum(v4)
+```
