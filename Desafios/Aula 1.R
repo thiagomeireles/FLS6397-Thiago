@@ -45,7 +45,7 @@ v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 # Original
 v2 <- c("1", "2", "3", "4")
 v1 + 42
-# Correção: A contr?rio das variáveis "character" nas quais se coloca aspas para delimitar os valores os vetores de variáveis numéricas (no caso, uma double) so definidos apenas pela separação em vírgula
+# Correção: Ao contrário das variáveis "character" nas quais se coloca aspas para delimitar os valores os vetores de variáveis numéricas (no caso, uma double) so definidos apenas pela separação em vírgula
 v2 <- c(1, 2, 3, 4)
 ## O Vetor "v1" é nominal, não sendo possível "somar" um valor numérico, ao contrário do vetor "v2"
 v2 + 42
@@ -57,7 +57,7 @@ v1 <- c("pato", "cachorro", "minhoca", "lagarto"
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 
 # Q9)
-# Original: Como explicado em Q7, ? necessário separar os valores atribuídos a vetores numérico apenas por vírgulas
+# Original: Como explicado em Q7, é necessário separar os valores atribuídos a vetores numérico apenas por vírgulas
 v3 <- c(33 31 40 25 27 40)
 # Correção
 v3 <- c(33, 31, 40, 25, 27, 40)
@@ -65,7 +65,7 @@ v3 <- c(33, 31, 40, 25, 27, 40)
 # Q10)
 # Original
 v1 <- c(pato, cachorro, minhoca, lagarto)
-# Correção: Necessáras as aspas para cada valor, como indicado em Q6
+# Correção: Necessárias as aspas para cada valor, como indicado em Q6
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
 
 # Q11)
@@ -87,7 +87,7 @@ v3 <- c(33, 31, 40, 25, 27, 40)
 myData <- data.frame(v1, v3)
 # Correção: Erros de digitação, como uma aspa a mais, quebram a leitura do código
 v1 <- c("pato", "cachorro", "minhoca", "lagarto")
-## Não é possível criar um data frame a partir da união de vetores com número distinto de coluna, como o caso em questão, uma vez que "v1" possui 4 colunas e "v3"" 6. Para fins didáticos, de unir os vetores para construção do data frame, "v3" ser reformulada somente com as 4 primeiras colunas
+# Não é possível criar um data frame a partir da união de vetores com número distinto de coluna, como o caso em questão, uma vez que "v1" possui 4 colunas e "v3"" 6. Para fins didáticos, de unir os vetores para construção do data frame, "v3" ser reformulada somente com as 4 primeiras colunas
 v3 <- c(33, 31, 40, 25)
 myData <- data.frame(v1, v3)
 
