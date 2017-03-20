@@ -1,11 +1,11 @@
-__Desafio 1__
+<p style="text-align: center;">__Desafio 1__</p>
 
 *Antes de iniciar a correção dos primeiros comandos é necessário carregar a base de dados "mtcars" presente na biblioteca de banco de dados "datasets"*
 ```
 library(datasets)
 data("mtcars")
 ```
-Q1)
+**Q1)**
 ```
 Head(mtcars)
 ```
@@ -13,7 +13,7 @@ Head(mtcars)
 ```
 head(mtcars)
 ```
-Q2)
+**Q2)**
 ```
 str(Mtcars)
 ```
