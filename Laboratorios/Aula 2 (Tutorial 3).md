@@ -1,6 +1,7 @@
 # Botando o Computador para trabalhar
 
 **Operadores relacionais**
+
 Igual: "==" 
 Diferente: "!="
 Maior:">" 
@@ -56,6 +57,7 @@ x > y
 ```
 
 **Operadores Relacionais e Vetores**
+
 É possível comparar um vetor a um valor, de forma que compara cada observação do vetor
 ```
 votos16 <- c(1030, 551, 992, 345, 203, 2037)
@@ -68,6 +70,7 @@ votos16 > votos12
 ```
 
 **Operadores lógicos (Booleanos)**
+
 "E": &
 "OU": |
 "NÃO": !
