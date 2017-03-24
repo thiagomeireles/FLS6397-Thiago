@@ -1,15 +1,4 @@
----
-title: "Chapter 3"
-author: "Thiago Meireles"
-date: "24 de março de 2017"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## Chapter 3
+# Chapter 3
 
 Nestre capítulo, a atividade consiste na construção de um baralho de cartas.
 
