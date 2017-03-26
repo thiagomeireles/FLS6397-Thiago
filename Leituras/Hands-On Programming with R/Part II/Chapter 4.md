@@ -59,3 +59,24 @@ Espaços em branco indicam ao R que deve extrair todos os valores de uma dimenso
 ```
 baralho[1, ]
 ```
+
+*Logical Values*
+
+Se criado um vetor de TRUE e FALSE como índice, o R indicar cada TRUE e FALSE para uma linha ou coluna do dta frame. Para funcionar, ele deve possuir a mema dimenso da linha ou coluna a ser lida para formar o subconjunto.
+```
+baralho[1, c(TRUE, TRUE, FALSE)]
+colunas <- c(TRUE, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
+F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
+F, F, F, F, F, F, F, F, F, F, F, F, F, F)
+baralho[colunas, ]
+```
+
+*Names*
+
+É possvel, também, perguntar por elementos pelo nome do objeto, normalmente utilizado para extrair as colunas de um data frame quando possuem nomes.
+```
+baralho[1, c("carta", "naipe", "valor")]
+baralho[ , "valor"]
+```
+
+**Deal a card**
