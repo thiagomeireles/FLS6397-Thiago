@@ -80,3 +80,54 @@ baralho[ , "valor"]
 ```
 
 **Deal a card**
+
+*Exercício:*
+Complete o seguinte cdigo para gerar uma funço que retorne a primeira linha do data frame:
+```
+deal1 <- function(cards) {
+# ?
+}
+```
+Como saída, pode-se indicar na função criada anteriormente para indicar a primeira linha com todas as colunas:
+```
+deal <- function() {
+  carta <- baralho[1, ]
+  assign("baralho", baralho[1, ], envir = globalenv())
+  carta
+}
+deal()
+```
+
+**Shuffle Cards**
+Em um baralho real, a ordem das cartas é reordenada aleatoriamente no "embaralhar", enquanto o baralho criado possui cada carta em uma linha de forma odernada, de forma que para "embaralhar"  necessrio reordenar as linhas de forma aleatória.
+*Como fazer isso?*
+Se você quer as linhas reordenadas aleatoriamente, ento voc precisa reordenar as linhas de 1 a 52 e forma aleatria e utilizar os resultados como um índice das linhas e depois gerar um novo data frame reordenado utilizando o índice.
+```
+aleatorio <- sample(1:52, size = 52)
+aleatorio
+baralho2 <- baralho[aleatorio, ]
+head(baralho2)
+```
+*Exercício:* Aplique as ideias acima para gerar uma funço de reordenamento do baralho.
+```
+embaralhar <- function(carta) {
+  random <- sample(1:52, size = 52)
+  carta[random, ]
+}
+baralho2 <- embaralhar(baralho)
+deal2 <- function() {
+  carta <- baralho2[1, ]
+  assign("baralho2", baralho2[1, ], envir = globalenv())
+  carta
+}
+carta2 <- deal2()
+```
+
+**Dollar Signs and Double Brackets**
+
+Dois tipos de objeto são um segundo sistema opcional de notação.
+*Cifrão*
+Ele permite extrair valores de listas e data frames, sendo bastante utilizado. Um exemplo de como funciona:
+```
+baralho$valor
+```
