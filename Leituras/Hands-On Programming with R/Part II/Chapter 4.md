@@ -35,6 +35,15 @@ O R no retira esses valores do objeto, retornando ao fim da operaço. Caso queir
 novo <- baralho[1, c(1:3)]
 novo
 ```
-Deve-se observar que isso no se limita a data frames, mas a valores em qualqer objetio do R.
+Deve-se observar que isso no se limita a data frames, mas a valores em qualqer objeto do R.
 
 *Negative Integers*
+
+Os negativos inteiros fazem exatamente o oposto, ou seja, retornam todos os elementos do objeto *exceto* o índice negativo.
+```
+baralho[-(2:52), 1:3]
+```
+São mais eficientes que os positivos inteiros para formar um subconjunto que inclua maior parte dos dados do data frame ou objeto.
+Se tentarmos usar um inteiro negativo com um positivo no mesmo índice, o R no aceitará; mas ele permite que sejam construídos índices positivo e negativo de forma separada para formar um subconjunto de um mesmo objeto, como no exemplo utilizado acima.
+
+*Zero*
