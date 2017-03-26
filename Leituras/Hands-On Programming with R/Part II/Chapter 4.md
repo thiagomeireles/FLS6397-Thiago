@@ -47,3 +47,15 @@ São mais eficientes que os positivos inteiros para formar um subconjunto que in
 Se tentarmos usar um inteiro negativo com um positivo no mesmo índice, o R no aceitará; mas ele permite que sejam construídos índices positivo e negativo de forma separada para formar um subconjunto de um mesmo objeto, como no exemplo utilizado acima.
 
 *Zero*
+
+Quando utiliza-se o zero, que no é um inteiro positivo ou negativo, o R reconhece como um tipo de subconjunto vazio, retornando nada, ou seja, no  muito útil.
+```
+baralho[0,0]
+```
+
+*Blank Spaces*
+
+Espaços em branco indicam ao R que deve extrair todos os valores de uma dimenso, ou seja, é útil para extrair informaçes de toda uma coluna ou linha de um data frame.
+```
+baralho[1, ]
+```
