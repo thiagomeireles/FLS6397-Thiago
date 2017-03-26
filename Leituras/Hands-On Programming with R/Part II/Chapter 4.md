@@ -131,3 +131,24 @@ Ele permite extrair valores de listas e data frames, sendo bastante utilizado. U
 ```
 baralho$valor
 ```
+Assim, o R retorna todos os valores da coluna como um vetor. A utilidade da notaço porque possibilita observar as varieis dos conjuntos de dados dentro do data frame
+*Nesse sentido, você pode utilizar uma funço como mdia e mediana dos valores de uma varivel. Elas esperam um vetor de valor como input e baralho$valor pode ser este vetor.*
+```
+mean(baralho$valor)
+median(baralho$valor)
+```
+Tambm é possvel utilizar a notação em elementos de uma lista caso tenham nomes, dando uma vantagem aqui tambm. O R retorna uma nova lista com os elementos requisitados, desde que requira aapenas um elemento
+```
+lista <- list(numeros = c(1, 2), logical = TRUE, strings = c("a", "b", "c"))
+lista
+lista[1]
+```
+O resultado  uma lista menor com um elemento, o vetor c(1,2), mas o R no trabalha com listas, de forma que funções como *sum(list[1])* retornam erro.
+```
+lista$numeros
+sum(lista$numeros)
+```
+Caso os elementos da lista no tenham nomes ou voc prefira no usá-los, pode-se utilizar dois colchetes em vez de um para gerar o subconjunto, oferecendo a mesma coisa que o $. 
+```
+lista[[1]]
+```
