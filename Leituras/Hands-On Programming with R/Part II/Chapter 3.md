@@ -3,6 +3,7 @@
 Nestre capítulo, a atividade consiste na construção de um baralho de cartas.
 
 Mas antes, é importante entender os tipos de vetores criados pelo R
+
 **Doubles:** um vetor "double" armazena números, positivos ou negativos, com ou sem casa decimal. De forma geral, o R armazena números como "doubles". O nome se refere ao número de bytes que  computador utiliza para armazenar um número, ainda que algumas funções indiquem esses vetores como "numerics" com o mesmo significado.
 ```
 double <- c(-2, -1, 0, 1, 2)
