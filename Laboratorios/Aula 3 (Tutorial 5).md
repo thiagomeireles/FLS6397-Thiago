@@ -366,3 +366,16 @@ table(fake$party)
 |:-----------:|:------------------:|:------------------:|
 |     15      |         6          |         9          |
 
+          
+**Substituição com o comando replace**
+
+Também é possível substituir valores em uma mesma variável com a função replace, como no exemplo a seguir.
+```
+fake$sex <- replace(fake$sex, fake$sex == "Female", "Mulher")
+fake$sex <- replace(fake$sex, fake$sex == "Male", "Homem")
+table(fake$sex)
+```
+|Homem|Mulher| 
+|:---:|:----:| 
+|15   |  15  |
+
