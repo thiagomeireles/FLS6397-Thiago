@@ -487,3 +487,52 @@ table(fake$economy)
 |:-----------:|:------------:|
 |         23  |          7   |
 
+**Ordenar linhas e remover linhas duplicadas**
+
+A funçãpo *order* permite gerar um vetor que indica qual a posição que cada linha deveria receber no ordenamento desejado.
+```
+ordem <- order(fake$income)
+print(ordem)
+```
+"Se aplicarmos um vetor numérico com um novo ordenaemnto à parte destinada às linhas no colchetes, receberemos o data frame ordenado:""
+```
+fake_ordenado <- fake[ordem, ]
+head(fake_ordenado)
+```
+A função *order* pode ser aplicada diretamente nos colchetes.
+```
+fake_ordenado <- fake[order(fake$income), ]
+```
+Para duplicar os dados utiliza-se a função *rbind*, *empilhando* data frames.
+```
+fake_duplicado <- rbind(fake, fake[1:10, ])
+```
+Se ordenarmos, veremos alguns valores duplicados.
+```
+fake_duplicado[order(fake_duplicado$income), ]
+```
+Podemos remover os valores duplicados utilizando o operador lógico *não* para ficar com todas as linhas não duplicadas.
+```
+fake_novo <- fake_duplicado[!duplicated(fake_duplicado),]
+fake_novo
+```
+
+
+**Item Adicional - Renomeando variáveis**
+
+Antes de aprende a forma *simples* de renomear variáveis, aprenderemos a mais trabalhosa.
+
+"Podemos observar os nomes das variáveis de um data frame usando o comando names"
+```
+names(fake)
+```
+"Os nomes das colunas são um vetor. Para renomear as variáveis, basta substituir o vetor de nomes por outro. Por exemplo, vamos manter todas as variáveis com o mesmo nome, exceto as três primeiras""
+```
+names(fake) <- c("idade", "sexo", "educacao", "income", "savings", "marriage", "kids", "party", "turnout", "vote_history", "economy", "incumbent", "candidate", "vazia", "poupanca", "savings_year", "rich", "rich2", "college")
+head(fake)
+```
+"Você não precisa de um vetor com todos os nomes sempre que precisar alterar algum. Basta conhecer a posição da variável que quer alterar. Veja um exemplo com "marriage", que está na sexta posição.
+```
+names(fake)[6] <- "casado"
+```
+"Simples, porém um pouco mala."
