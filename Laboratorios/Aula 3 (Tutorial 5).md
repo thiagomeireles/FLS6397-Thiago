@@ -330,7 +330,9 @@ fake$age <- fake$age  * 12
 
 
 
---------------------------------------------------------
-Independente |Partido Convervador | Partido Socialista 
-     15      |         6          |         9 
---------------------------------------------------------
+
+
+|Independente | Partido Convervador| Partido Socialista |
+|-------------|:------------------:|:------------------:|
+|     15      |         6          |         9          |
+
