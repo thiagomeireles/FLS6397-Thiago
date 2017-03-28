@@ -229,3 +229,63 @@ print(selecao_colunas)
 new_fake2 <- fake[,selecao_colunas]
 ```
 
+**Selecionando linhas com o operadores relacionais**
+
+Como selecionar linhas, muito mais numerosas que as colunas, em um banco de dados?
+
+Utilizamos operadores relacionais.
+
+Um exemplo pode ser obtido na seleção dos indivíduos que pretendam votar na próxima eleição (variável *turnout*).
+
+```
+fake$turnout == "Yes"
+```
+Podemos *guardar* esse vetor lógico em um novo objeto.
+```
+selecao_linhas <- fake$turnout == "Yes"
+print(selecao_linhas)
+```
+Em seguida, inserimos esse vetor lógico na posição das linhas dentro dos colchetes, gerando um novo data frame com os dados que atendam a essa condição:
+
+```
+fake_will_vote <- fake[selecao_linhas, ]
+```
+"Basicamente, para fazermos uma seleção podemos usar a posição das linhas (ou das colunas), seus nomes ou um vetor lógico do mesmo tamanho das linhas (ou colunas). Sequer precisamos fazer o passo a passo acima."
+
+Vejamos um exemplo gerando um data frame com os indivíduos que se posicionam como "Independent":
+```
+fake_independents <- fake[fake$party == "Independent", ]
+```
+Também é posível combinar as condições usando os operadores lógicos (*ou*, *e*, *não*) para seleções mais complexas:
+```
+fake_married_no_college_yong <- fake[fake$marriage == "Yes" & 
+                                       fake$age <= 30 & 
+                                       !(fake$educ == "College Degree or more"), ]
+```
+
+*Exercício*
+
+Produza um novo data frame com apenas 4 variáveis -- "age", "income", "economy" e "candidate" -- e que contenha apenas eleitores homens, ricos ("income" maior que FM$ 3 mil, que é dinheiro pra caramba em Fakeland) e inclinados a votar no candidato "Trampi".
+```
+fake_conditions <- fake[fake$sex == "Male" &
+                          fake$income > 3000 &
+                          fake$candidate == "Trampi", c("age", "income", "economy", "candidate")
+                        ]
+```
+Quais as dimensões do novo data frame? Qual é a idade média dos eleitores no novo data frame? Qual é a soma da renda no novo data frame?
+- Dimensões: 3 linhas e 4 colunas
+```
+dim(fake_conditions)
+# [1] 3 4
+```
+- Idade média: 35.34 anos
+```
+mean(fake_conditions$age)
+# [1] 35.33333
+```
+- Soma das rendas: 16931.48
+```
+sum(fake_conditions$income)
+[1] 16931.48
+```
+
