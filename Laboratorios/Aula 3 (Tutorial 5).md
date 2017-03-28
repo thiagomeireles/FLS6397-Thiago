@@ -125,3 +125,37 @@ Tabela de duas entradas para duas variávels categóricas (contagem):
 table(fake$party, fake$candidate)
 ```
 
+**Dimensões em um data frame**
+
+O data frame, assim como a matriz, possui as dimensões de linha e coluna. Para selecionar elementos de um data frame podemos utilziar colchetes separados por uma vírgula separando os dois argumentos *[linha, coluna]*, como nos exemplos abaixo:
+
+Quinta linha:
+```
+fake[5, ]
+```
+Quinta e a oitava:
+```
+fake[c(5,8), ]
+```
+As linhas 4 a 10:
+```
+fake[4:10,]
+```
+Segunda coluna:
+```
+fake[, 2]
+```
+Note que o resultado é semelhante ao de:
+```
+fake$sex
+```
+*No entanto, no primeiro caso estamos produzindo um data frame de uma única coluna, enquanto no segundo estamos produzinho um vetor. Exceto pela classe, são idênticos.*
+Segunda e sétima colunas:
+```
+fake[, c(2,7)]
+```
+Três primeiras colunas:
+```
+fake[, 1:3]
+```
+
