@@ -379,3 +379,36 @@ table(fake$sex)
 |:---:|:----:| 
 |15   |  15  |
 
+**Recodificando uma variável**
+
+Outra função importante é a recodificação de uma variável, como no exemplo de transformar uma variável contíuna (*income*) em uma variável categórica (*rich*), com ricos com renda maior a FM$ 3 mil para *rich* e *not rich* para rendas menores.
+```
+fake$rich <- NA
+fake$rich[fake$income > 3000] <- "rich"
+fake$rich[fake$income <= 3000] <- "not rich"
+table(fake$rich)
+```
+|not rich  |   rich   |
+|:--------:|:--------:|
+|19        | 11       |
+
+
+*Exercício*
+
+Utilize o que você aprendeu sobre transformações de variáveis neste tutorial e o sobre fatores ("factors") no tutorial 2 para transformar a variável "rich" em fatores.
+```
+fake$f_rich <- factor(fake$rich)
+str(fake$f_rich)
+levels(fake$f_rich)
+```
+
+*Exercício (mais um)*
+
+Crie a variável "kids2" que indica se o indivíduo tem algum filho (TRUE) ou nenhum (FALSE). Dica: essa é uma variável de texto, e não numérica.
+```
+fake$kids2 <- fake$kids != "0"
+table(fake$kids2)
+```
+|FALSE     |  TRUE    |
+|:--------:|:--------:|
+|   22     |  8       | 
