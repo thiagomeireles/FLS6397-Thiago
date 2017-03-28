@@ -91,3 +91,37 @@ class(fake$incumbent)
 class(fake$candidate)
 # [1] "character"
 ```
+
+**Data frame como conjunto de vetores**
+
+Para utilizar as variáveis do data frame como vetores, usa-se o símbolo *$* (cifrão) separando o nome do data frame do nome da variável, como no exemplo:
+
+```
+print(fake$age)
+```
+Podemos fazer uma cópia do vetor "age" que não seja variável "fake"? Sim:
+```
+idade <- fake$age
+print(idade)
+```
+Isto é necessário porque podemos encontrar mais de um data frame no mesmo workspace que possuam variáveis com o mesmo nome. É como se construíssemos um endereço que evita ambiguidade.
+
+*Outros exemplos simples de como usar variáveis de um data frame em outras funções (algumas das quais veremos no futuro, mas você já pode ir se acostumando à linguagem).*
+
+Gráfico de distribuição de uma variável contínua:
+```
+plot(density(fake$age), main = "Distribuição de Idade", xlab = "Idade")
+```
+Gráfico de dispersão de duas variáveis contínuas:
+```
+plot(fake$age, fake$savings, main = "Idade x Poupança", xlab = "Idade", ylab = "Poupança")
+```
+Tabela de uma variável categórica (contagem):
+```
+table(fake$party)
+```
+Tabela de duas entradas para duas variávels categóricas (contagem):
+```
+table(fake$party, fake$candidate)
+```
+
