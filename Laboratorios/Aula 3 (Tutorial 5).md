@@ -465,10 +465,10 @@ table(fake$college)
 ```
 table(fake$college, fake$educ)
 ```
-           |  College Degree or more| College Incomplete |High School Degree |No High School Degree|
+|          |  College Degree or more| College Incomplete |High School Degree |No High School Degree|
 |:--------:|:----------------------:|:------------------:|:-----------------:|:-------------------:|
-  College  |               7        |          0         |         0         |            0        |
-No College |                     0  |                6   |              14   |                  3  |
+| College  |               7        |          0         |         0         |            0        |
+|No College|                     0  |                6   |              14   |                  3  |
 
 *Exercício*
 
