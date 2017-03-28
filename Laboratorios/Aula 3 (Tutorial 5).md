@@ -444,3 +444,46 @@ table(fake$poupador)
 |:-----------:|:-----------:|
 |          22 |            8| 
 
+**Recodificando uma variável contínua com a função recode**
+
+"O equivalente da função cut para variáveis categóricas, estejam elas como texto ou como fatores é a função recode, do pacote *dplyr*. Seu uso é simples e intuitivo. Vamos recodificar como exemplo a variável *educ*""
+```
+install.packages("dplyr")
+library(dplyr)
+fake$college <- recode(fake$educ, 
+                       "No High School Degree" = "No College",
+                       "High School Degree" = "No College",
+                       "College Incomplete" = "No College",
+                       "College Degree or more" = "College")
+table(fake$college)
+```
+|   College No| College     |
+|:-----------:|:-----------:|
+|         7   |      23     |
+
+"Podemos comparar as mudanças com uma tabela de 2 entradas""
+```
+table(fake$college, fake$educ)
+```
+           |  College Degree or more| College Incomplete |High School Degree |No High School Degree|
+|:--------:|:----------------------:|:------------------:|:-----------------:|:-------------------:|
+  College  |               7        |          0         |         0         |            0        |
+No College |                     0  |                6   |              14   |                  3  |
+
+*Exercício*
+
+Crie a variável "economia", que os indivíduos que avaliam a economia (variável "economy") como "Good" ou melhor recebem o valor "positivo" e os demais recebem "negativo".
+```
+fake$economy <- recode(fake$economy, 
+                       "About average" = "Not Positive",
+                       "Bad" = "Not Positive",
+                       "Don't Know" = "Not Positive",
+                       "Very Bad" = "Not Positive",
+                       "Good" = "Positive",
+                       "Very good" = "Positive")
+table(fake$economy)
+```
+|Not Positive |    Positive  |
+|:-----------:|:------------:|
+|         23  |          7   |
+
