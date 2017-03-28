@@ -65,31 +65,43 @@ str(fake)
 - Classes:
 ```
 class(fake$age)
-# [1] "integer"
+[1] "integer"
+
 class(fake$sex)
-# [1] "character"
+[1] "character"
+
 class(fake$educ)
-# [1] "character"
+[1] "character"
+
 class(fake$income)
-# [1] "numeric"
+[1] "numeric"
+
 class(fake$savings)
-# [1] "numeric"
+[1] "numeric"
+
 class(fake$marriage)
-# [1] "character"
+[1] "character"
+
 class(fake$kids)
-# [1] "character"
+[1] "character"
+
 class(fake$party)
-# [1] "character"
+[1] "character"
+
 class(fake$turnout)
-# [1] "character"
+[1] "character"
+
 class(fake$vote_history)
-# [1] "integer"
+[1] "integer"
+
 class(fake$economy)
-# [1] "character"
+[1] "character"
+
 class(fake$incumbent)
-# [1] "character"
+[1] "character"
+
 class(fake$candidate)
-# [1] "character"
+[1] "character"
 ```
 
 **Data frame como conjunto de vetores**
@@ -276,12 +288,12 @@ Quais as dimensões do novo data frame? Qual é a idade média dos eleitores no 
 - Dimensões: 3 linhas e 4 colunas
 ```
 dim(fake_conditions)
-# [1] 3 4
+[1] 3 4
 ```
 - Idade média: 35.34 anos
 ```
 mean(fake_conditions$age)
-# [1] 35.33333
+[1] 35.33333
 ```
 - Soma das rendas: 16931.48
 ```
