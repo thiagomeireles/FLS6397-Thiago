@@ -301,3 +301,30 @@ sum(fake_conditions$income)
 [1] 16931.48
 ```
 
+**Função subset**
+
+A função subset também permite realizar a seleção de linhas, podendo ser entendida como uma maneira mais simples e elegante.
+```
+fake_independents <- subset(fake, party == "Independent")
+```
+
+**Criando uma nova coluna**
+
+Criar uma nova coluna em um data frame é trivial.
+
+Geraremos uma coluna "vazia", ou seja, apenas com "missing values" (*NA* para o R).
+```
+fake$vazia <- NA
+```
+Podemos criar uma coluna a partir e outra(s), como no exemplo a seguir com poupança (*savings* convertida para real, sendo um FM$1 = R$ 14) e *savings_year* (média da poupança por anos do indivíduo a partir dos 18)
+```
+fake$poupanca <- fake$savings / 17
+fake$savings_year <- fake$savings / (fake$age - 18)
+```
+È possível utilizar qualquer operação de vetores vistas nos tutoriais anteriores, **desde que** os vetores tenham sempre o mesmo tamanho, não sendo um problema em data frames.
+
+Caso queiramos substituir o conteúdo de uma variável, o procedimento é o mesmo, mas atribuindo o resultado da operação ao vetor existente.
+```
+fake$age <- fake$age  * 12
+```
+
