@@ -328,3 +328,10 @@ Caso queiramos substituir o conteúdo de uma variável, o procedimento é o mesm
 fake$age <- fake$age  * 12
 ```
 
+
+
+--------------------------------------------------------
+Independente |Partido Convervador | Partido Socialista 
+--------------------------------------------------------
+     15      |         6          |         9 
+--------------------------------------------------------
