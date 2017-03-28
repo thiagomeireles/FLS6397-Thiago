@@ -328,10 +328,41 @@ Caso queiramos substituir o conteúdo de uma variável, o procedimento é o mesm
 fake$age <- fake$age  * 12
 ```
 
+**Substituindo valores em um variável**
 
+"Vamos *traduzir* para o português a variável "party". Faremos isso alterando cada uma das categorias individualmente e, por enquanto, sem usar nenhuma função que auxilie a substituição de valores. Começemos com uma tabela simples da variável *party*"
+```
+table(fake$party)
+```
+"Agora, observe o resultado do código abaixo:""
+```
+fake$party[fake$party == "Independent"]
+```
+"Fizemos um subconjunto de apenas uma variável do data frame, e não do data frame todo. Note a ausência da vírgula dentro do colchetes, pois Se atribuirmos algo a essa selação, por exemplo, o texto *Independentes*, substituiremos os valores da seleção:""
+```
+fake$party[fake$party == "Independent"] <- "Independente"
+```
+*"Importante: a seleção do vetor (colchetes) está à direita do símbolo de atribuição."*
 
+```
+table(fake$party)
+```
 
+*Exercício*
+Traduza para o português as demais categorias da variável "party".
+- Traduzindo a categoria *Conservative Party*
+```
+fake$party[fake$party == "Conservative Party"] <- "Partido Convervador"
+```
+- Traduzindo a categoria *Socialist Party*
+```
+fake$party[fake$party == "Socialist Party"] <- "Partido Socialista"
+```
+- Observando a tabela com os novos nomes
+```
+table(fake$party)
 
+```   
 |Independente | Partido Convervador| Partido Socialista |
 |:-----------:|:------------------:|:------------------:|
 |     15      |         6          |         9          |
