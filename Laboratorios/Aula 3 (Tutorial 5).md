@@ -412,3 +412,35 @@ table(fake$kids2)
 |FALSE     |  TRUE    |
 |:--------:|:--------:|
 |   22     |  8       | 
+
+**Recodificando uma variável contínua com a função cut**
+
+A função cut também é utilizada para recodificar variáveis contínuas.
+```
+fake$rich2 <- cut(fake$income, 
+                  breaks = c(-Inf, 3000, Inf), 
+                  labels = c("não rico", "rico"))
+table(fake$rich2)
+```
+|não rico  |    rico  | 
+|:--------:|:--------:|
+|      19  |     11   | 
+
+"Algumas observações importantes:
+- se a nova variável tiver 2 categorias, precisamos de 3 "break points"; "-Inf" e "Inf" são os símbolos do R para menos e mais infinito, respectivamente;
+- por padrão, o R nao inclui o primeiro "break point" na primeira categoria, exceto se o argumento "include.lowest" for alterado para TRUE;
+- também por padrão, os intervalos são fechados à direita, e abertos à esquerda (ou seja, incluem o valor superior que delimita o intervalor, mas não o inferior), exceto se "right" o argumento for alterado para FALSE."
+
+*Exercício*
+
+Crie a variável "poupador", gerada a partir de *savings_year* (que criamos anteriormente, antes de transformar "age" em meses), e que separa os indivíduos que poupam muito (mais de FM/$ 1000 por ano) dos que poupam pouco. Use a função cut.
+```
+fake$poupador <- cut(fake$savings_year, 
+                  breaks = c(-Inf, 1000, Inf), 
+                  labels = c("não poupador", "poupador"))
+table(fake$poupador)
+```
+|não poupador |    poupador |
+|:-----------:|:-----------:|
+|          22 |            8| 
+
