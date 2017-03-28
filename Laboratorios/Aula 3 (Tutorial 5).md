@@ -361,7 +361,6 @@ fake$party[fake$party == "Socialist Party"] <- "Partido Socialista"
 - Observando a tabela com os novos nomes
 ```
 table(fake$party)
-
 ```   
 |Independente | Partido Convervador| Partido Socialista |
 |:-----------:|:------------------:|:------------------:|
