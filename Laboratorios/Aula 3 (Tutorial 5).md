@@ -207,3 +207,25 @@ fake[25, "candidate"]
 # Trampi
 ```
 
+**Seleção de colunas com nomes das variáveis**
+
+Assim como feito no exercício anterior, como as colunas possuem nome (fato comum e regra trabalharmos muito mais com os nomes das colunas), podemos utilizar seus nomes no lugar de suas posições para selecioná-las.
+```
+fake[, c("age", "income", "party")]
+```
+No entanto, utilizaro o operador ":" não se aplicar porque só se aplica em sequências de números inteiros.
+```
+fake[, "age":"sex"]
+```
+
+"Vamos super que acabamos de abrir os resultados eleitorais do Rio Grande do Sul nas eleições de 2016 retirados do Repositório de Dados Eleitorais do TSE (exatamente como faremos na atividade que segue este tutorial). Há um número grande de colunas desnecessárias a análise dos resultados (por exemplo, o ano da eleição, a hora da extração dos dados, etc). Para liberar memória do computador e trabalhar com um data frame menor, fazemos uma seleção de colunas exatamente como acima, seja usando sua posição ou seu nome e geramos um data frame novo (ou sobrescrevemos o atual). Veja um exemplo com "fake":""
+```
+new_fake <- fake[, c("age", "income", "party", "candidate")]
+```
+"E se quiseremos todas as colunas menos "turnout" e "vote_history"? Podemos usar a função setdiff, que gera a diferença entre dois vetores, por exemplo, o vetor com todos os nomes de colunas (gerado com a função names) e o vetor com as colunas que desejamos excluir. Vamos guardar o resultado em "new_fake2"
+```
+selecao_colunas <- setdiff(names(fake), c("turnout", "vote_history"))
+print(selecao_colunas)
+new_fake2 <- fake[,selecao_colunas]
+```
+
