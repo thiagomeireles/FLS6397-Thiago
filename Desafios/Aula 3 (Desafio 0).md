@@ -109,7 +109,7 @@ Encoding(pr$X27) <- "latin1"
 
 *Geramos um novo data frame, "sul", que compila os data frames dos 3 estados da região Sul.*
 ```
-sul <- rbind(pr, rs, sc
+sul <- rbind(pr, rs, sc)
 ```
 
 **4- Leia até o final as instruções e identifique quais variáveis são necessárias para tarefa. Selecione apenas tais variáveis e renomeia-as (você pode trocar a ordem se achar mais fácil).**
