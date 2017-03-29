@@ -1,3 +1,12 @@
+| Title    | Author        |Date               | Output      |
+|:--------:|:-------------:|:-----------------:|:-----------:|
+|Chapter 5 |Thiago Meireles|24 de março de 2017|html_document|
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Chapter 5: Modifying values
 
 Antes de começar a manipular o dataframe, criaremos uma cópia.
