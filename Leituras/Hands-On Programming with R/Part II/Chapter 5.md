@@ -77,6 +77,130 @@ Você pode comparar dois objetos do R com operadores lgicos, mas faz mais sentid
 *Exercício:* Extraia a coluna carta de baralho2 e teste se cada valor é igual ao ás. Como desafio, use o R para countar rapidamente quantas cartas so iguais ao ás.
 ```
 baralho2$carta
-baralho2$carta == "Ás"
+baralho2$carta == "As"
 
+sum(baralho2$carta == "As")
+```
+Como Exercício adicional, localizaremos as cartas em um terceiro baralho "embaralhado"
+```
+baralho3 <- baralho[aleatorio, ]
+
+baralho3$carta == "As"
+```
+
+Em síntese, os testes lógicos permitem selecionar valores dentro de um objeto; já os subconjuntos lógicos são uma ótima ferramenta para identificar, extrair e modificar valores individuais no conjunto de dados.
+
+*Exercício:*
+Assinale um valor de 1 para cada carta no baralho4 que seja de copas.
+```
+baralho4 <- baralho
+baralho4$valor <- 0
+baralho4$naipe == "Copas"
+baralho4$valor[baralho4$naipe == "Copas"] <- 1
+baralho4$valor[baralho4$naipe == "Copas"]
+```
+
+**Boolean Operators**
+
+Operadores booleanos combinam mútiplos testes lógicos em um único teste.
+
+*Exercise*
+Tente converter estas sentenças em testes com o código R a partir de objetos definidos:
+```
+w <- c(-1, 0, 1)
+x <- c(5, 15)
+y <- "Fevereiro"
+z <- c("Segunda", "Terça", "Quarta")
+```
+- w é positivo?
+```
+w > 0
+[1] FALSE FALSE  TRUE
+```
+- x é maior que 10 e menor que 20?
+```
+x > 10 & x < 20
+[1] FALSE  TRUE
+```
+- O objeto y é a palavra "Fevereiro"?
+```
+y == "Fevereiro"
+[1] TRUE
+```
+- Todos os valores em z são dias da semana?
+```
+dias_semana <- c("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado")
+
+all(z %in% dias_semana)
+[1] TRUE
+```
+Trazendo um último jogo, o *blackjack* (Vinte e um), no qual todas as figuras tem um valor igual a sua carta, sendo o valor de 10 aplicado ao rei, rainha e valete, e os Ases recebendo valor de 10 ou 1, dependendo do resultado final do jogo. Vamos aplicar os valores corretos a essas cartas a partir de um baralho novo.
+```
+baralho5 <- baralho
+```
+Vamos, primeiro, aplicar o valor de 10 às figuras.
+```
+figuras <- baralho5$carta %in% c("Rei", "Rainha", "Valete")
+baralho5$valor[figuras] <- 10
+head(baralho5, 13)
+```
+O valor que o "Ás" assume depende das outras cartas nas mãos do jogador, sendo, assim, um caso de falta de informação.
+
+**Missing Information**
+
+___na.rm___
+
+Muitas das funções do R vem com argumentos opcionais, sendo o *na.rm* responsável por ignorar NAs na hora de executar uma função, uma vez que qualquer operação que contenha missings é reconhecida como missing pelo R. Vejamos um exemplo:
+```
+c(NA, 1:50)
+
+mean(c)
+[1] NA
+Warning message:
+In mean.default(c) : argumento não é numérico nem lógico: retornando NA
+
+mean(c(NA, 1:50))
+[1] NA
+
+mean(c(NA, 1:50), na.rm = TRUE)
+[1] 25.5
+```
+
+___is.na___
+
+Assim como as funções, os operadores lógicos também possuem dificuldades em encontrar os *missing values* no R, assim adota-se a função *is.na* para lidar com a situação. Vejamos:
+```
+NA == NA
+[1] NA
+
+c(1, 2, 3, NA) == NA
+[1] NA NA NA NA
+
+is.na(NA)
+[1] TRUE
+
+vec <- c(1, 2, 3, NA)
+is.na(vec)
+[1] FALSE FALSE FALSE  TRUE
+```
+
+Assim, a saída encontrada para lidar com o baralho de *blackjack* seria atribuir um valor NA aos Ases para indicar que não se sabe o valor final de cada "ÁS", além de previnir pontuações acidentais em uma mão antes de determinar seu valor:
+```
+baralho5$valor[baralho5$carta == "As"] <- NA
+head(baralho5, 13)
+
+    carta   naipe valor
+1     Rei Espadas    10
+2  Rainha Espadas    10
+3  Valete Espadas    10
+4     Dez Espadas    10
+5    Nove Espadas     9
+6    Oito Espadas     8
+7    Sete Espadas     7
+8    Seis Espadas     6
+9   Cinco Espadas     5
+10 Quatro Espadas     4
+11   Tres Espadas     3
+12   Dois Espadas     2
+13     As Espadas    NA
 ```
