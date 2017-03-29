@@ -1,8 +1,6 @@
----
 |Título               | Autor             | Data                  | Output       |
 |:-------------------:|:-----------------:|:---------------------:|:------------:| 
 |"Aula 3 (Desafio 0)" |"Thiago Meireles"  |"29 de março de 2017"  |html_document |
----
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
