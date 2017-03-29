@@ -2,6 +2,10 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Desafio 0
 
 Siga as instruções abaixo. Documente **TODOS** os seus passos em um script. Comente no seu script __TODOS__ os seus passos e explique a si mesm@ suas escolhas e estratégias. Colar pedaços de código nesta atividade é permitido e peça ajuda se precisar. Mencione **SEMPRE** em comentários quando a solução encontrada não for sua.
@@ -131,10 +135,79 @@ head(sul_analise2)
 
 **5- Selecione apenas as linhas que contém resultados eleitorais para prefeit@.**
 
+*Selecionamos as linhas que contém os resultados eleitorais para prefeit@ via operadores relacionais. Assim, pediremos que o R selecione todas as linhas para as quais o valor de *cargo* seja *PREFEITO*, originando um novo data frame com essas informações*.
+prefeitos_sul <- sul_analise[sul_analise$cargo == "PREFEITO", ]
+
 **6- Selecione apenas as linhas que contém os resultados eleitorais para prefeit@s eleit@s.**
+
+*Aqui podemos pedir para o R realizar a tarefa de duas formas diferentes*
+
+- Em uma delas, podemos pedir para que gere um novo data frame diretamente de *sul_analise* utilizando operadores relacionais que indiquem que queremos somente os dados relativos a *PREFEITOS* na variável *cargo* **E** *ELEITO* na variável *situacao*
+```
+pref_sul_eleitos <- sul_analise[sul_analise$situacao == "ELEITO" &
+                                sul_analise$cargo == "PREFEITO", ]
+```
+
+- Em outra, como já geramos um data frame, *prefeitos_sul*, que contém somente as informações relativas às candidaturas a prefeit@, podemos filtrar esses dados somente com aqueles que foram eleit@s e gerar um novo data frame.
+```
+pref_sul_eleitos2 <- prefeitos_sul[prefeitos_sul$situacao == "ELEITO", ]
+```
 
 **7- Quantas linhas restaram? Quantas colunas? (postarei o gabarito ao longo da semana no repositório).**
 
+*Para identificar quantas linhas e colunas restaram ou observamos as informações no Ambiente Global ou pedimos as dimensões do data frame para o R.*
+```
+dim(pref_sul_eleitos)
+[1] 1283    3
+```
+*Assim, observamos que restaram 1283 linhas (observações) e 3 colunas (variáveis selecionadas no exercício 4)*
+
 **8- Crie, a seu critério, 3 categorias de partido e crie uma nova variável: esquerda, direita, irrelevantes. Dê o nome de partido\_categoria a esta variável.**
 
+*Antes de definir a nova variável, observaremos quais os partidos compõem a análise*
+```
+levels(pref_sul_eleitos$partido)
+ [1] "DEM"     "NOVO"    "PC do B" "PCB"     "PCO"     "PDT"     "PEN"     "PHS"     "PMB"     "PMDB"    "PMN"     "PP"      "PPL"    
+[14] "PPS"     "PR"      "PRB"     "PROS"    "PRP"     "PRTB"    "PSB"     "PSC"     "PSD"     "PSDB"    "PSDC"    "PSL"     "PSOL"   
+[27] "PSTU"    "PT"      "PT do B" "PTB"     "PTC"     "PTN"     "PV"      "REDE"    "SD"
+```
+*Utilizando a aproximação de *[Power e Zucco (2009)]* (http://www.fgv.br/professor/cesar.zucco/files/PaperLARR2009.pdf) para as posições na legislatura de 2005, classificaremos:*
+- *Esquerda: PCdoB, PSB, PT, PPS e PDT;*
+- *Direita: PMDB, PSDB, PTB, PL, DEM (então PFL) e PP;*
+- *Irrelevantes: aqui tem-se partidos que possuem alguma representatividade (como PSOL e REDE), mas que não foram classificados pela análise utilizada.*
+
+*Agora, vamos gerar uma nova variável, digamos *ideologia*, para classificar os partidos segundo o critério acima, mas que, em um primeiro momento, será composta de missing values*
+```
+pref_sul_eleitos$ideologia <- NA
+```
+
+*Em um segundo momento, reclassificaremos a variável de acordo com o que foi estipulado acima via função *recode*, pertencente ao pacote *dplyr* que será carregado antes da execução*
+```
+library(dplyr)
+
+pref_sul_eleitos$ideologia <- recode(pref_sul_eleitos2$partido,
+                                     "PCdoB" = "Esquerda",
+                                     "PSB" = "Esquerda",
+                                     "PT" = "Esquerda",
+                                     "PPS" = "Esquerda",
+                                     "PDT" = "Esquerda",
+                                     "PMDB" = "Direita",
+                                     "PSDB" = "Direita",
+                                     "PTB" = "Direita",
+                                     "PL" = "Direita",
+                                     "DEM" = "Direita",
+                                     "PP" = "Direita",
+                                     .default = "Irrelevante"
+)
+```
+*Dessa forma, recodificamos os partidos considerados de Esquerda (que incluem a centro-esquerda), os de direita (que incluem os de centro-direita) e pedimos para a função atribuir àqueles que não foram selecionados para serem classificados como irrelevantes com o argumento *.default*.*
+
+
 **9- Faça uma tabela da nova variável.**
+```
+table(pref_sul_eleitos$ideologia)
+
+```
+|Direita |Irrelevante|Esquerda| 
+|:------:|:---------:|:------:|
+|779     |    224    |  278   |
