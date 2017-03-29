@@ -2,10 +2,6 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Desafio 0
 
 Siga as instruções abaixo. Documente **TODOS** os seus passos em um script. Comente no seu script __TODOS__ os seus passos e explique a si mesm@ suas escolhas e estratégias. Colar pedaços de código nesta atividade é permitido e peça ajuda se precisar. Mencione **SEMPRE** em comentários quando a solução encontrada não for sua.
