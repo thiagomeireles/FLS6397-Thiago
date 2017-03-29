@@ -71,7 +71,9 @@ vetor[c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE)]
 Ainda que não aparente muita utilidade, veremos como se aplica na localização das observações.
 
 **Logical Tests**
-Voc pode comparar dois objetos do R com operadores lgicos, mas faz mais sentido se comparar dois objetos do mesmo tipo de dados. Se comparar objetos de diferentes tipos o R usa suas regras de coerção para evitar a comparação.
+
+Você pode comparar dois objetos do R com operadores lgicos, mas faz mais sentido se comparar dois objetos do mesmo tipo de dados. Se comparar objetos de diferentes tipos o R usa suas regras de coerção para evitar a comparação.
+
 *Exercício:* Extraia a coluna carta de baralho2 e teste se cada valor é igual ao ás. Como desafio, use o R para countar rapidamente quantas cartas so iguais ao ás.
 ```
 baralho2$carta
