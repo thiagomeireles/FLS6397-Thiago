@@ -7,7 +7,7 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Chapter 2: Packages and Help Pages
+## Chapter 2: Packages and Help Pages
 
 O capítulo tem duas metas principais em termos de execução: (1) ver se o dado é justo e (2) viciá-lo
 
