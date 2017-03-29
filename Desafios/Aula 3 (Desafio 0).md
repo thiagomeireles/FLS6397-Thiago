@@ -55,6 +55,7 @@ list.files()
 library(readr)
 ```
 *Posteriormente, importamos os arquivos .txt referentes aos 3 estados so Sul*
+
 Rio Grande do Sul
 ```
 rs <- read_delim("~/votacao_candidato_munzona_2016_RS.txt", ";",
