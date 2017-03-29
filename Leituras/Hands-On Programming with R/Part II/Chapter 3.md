@@ -151,11 +151,23 @@ baralho <- data.frame(carta, naipe, valor)
 ```
 
 **Importando Dados**
+
+Primeiro geramos um arquivo *.csv* que está disponível na pasta do github. Faremos o download e, a partir disso, importaremos o arquivo.
+```
+baralho <- "https://github.com/thiagomeireles/FLS6397-Thiago/blob/master/Leituras/Hands-On%20Programming%20with%20R/Part%20II/baralho.csv"
+```
+
 ```
 library(readr)
-baralho <- read_csv("C:/Users/dcplab/Downloads/baralho.csv")
-View(baralho)
+baralho_test <- read.csv("~/baralho.csv", header = T, sep = ",")
+head(baralho)
 ```
+
+*Vemos, então, a presença de uma quarta variável *X*, que indica somente o número da observação. Caso queiramos tirá-la, basta gerar um novo data frame com as informações das outras três colunas:*
+```
+baralho <- baralho_test[ , c(2, 3, 4)]
+```
+
 
 **Salvando Dados**
 ```
