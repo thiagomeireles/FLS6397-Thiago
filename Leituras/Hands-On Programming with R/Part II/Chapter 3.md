@@ -7,7 +7,7 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Chapter 3
+## Chapter 3: R Objects
 
 Nestre capítulo, a atividade consiste na construção de um baralho de cartas.
 
