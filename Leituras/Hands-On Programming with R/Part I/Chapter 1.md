@@ -7,7 +7,7 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## The Very Basics
+## Chapter1: The Very Basics
 
 O Capítulo objetiva criar a simulação de um jogo de dados.
 
