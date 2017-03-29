@@ -7,7 +7,7 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Chapter 4
+## Chapter 4: R Notation
 
 Agora que temos o baralho, utilizamos a função "deal" para pegar uma carta.
 ```
