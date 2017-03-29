@@ -171,7 +171,7 @@ levels(pref_sul_eleitos$partido)
 [14] "PPS"     "PR"      "PRB"     "PROS"    "PRP"     "PRTB"    "PSB"     "PSC"     "PSD"     "PSDB"    "PSDC"    "PSL"     "PSOL"   
 [27] "PSTU"    "PT"      "PT do B" "PTB"     "PTC"     "PTN"     "PV"      "REDE"    "SD"
 ```
-*Utilizando a aproximação de *[[http://www.fgv.br/professor/cesar.zucco/files/PaperLARR2009.pdf | Power & Zucco(2009)]]* () para as posições na legislatura de 2005, classificaremos:*
+*Utilizando a aproximação de *[[http://www.fgv.br/professor/cesar.zucco/files/PaperLARR2009.pdf|Power&Zucco(2009)]]* () para as posições na legislatura de 2005, classificaremos:*
 - *Esquerda: PCdoB, PSB, PT, PPS e PDT;*
 - *Direita: PMDB, PSDB, PTB, PL, DEM (então PFL) e PP;*
 - *Irrelevantes: aqui tem-se partidos que possuem alguma representatividade (como PSOL e REDE), mas que não foram classificados pela análise utilizada.*
