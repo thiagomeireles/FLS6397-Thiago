@@ -67,15 +67,52 @@ globalenv()$new
 
 **The Active Environments**
 
+*Ambiente Ativo:* O R trabalha o tempo todo com um único ambiente, guardando novos objetos nesse ambiente quando criados/adicionados e no qual é possível observar os objetos existentes. Normalmente é o ambiente global, mas pode ser alterado por uma função.
+```
+environment()
+# <enviroment: R_GlobalEnv>
+```
+Podemos pensar no ambiente global como nosso espaço de trabalho, pois todas os objetos criados nas linhas de comando são salvos nele.
 
 **Scoping Rule**
 
+Quando o objeto não está no ambiente global, o R segue uma série de regras para encontrá-lo. São as chamadas regras de escopo, das quais já nos deparamos com algumas:
+
+- O Rolha por objetos no ambiente atualmente ativo;
+
+- Quando trabalhamos na linha de comando, o ambiente ativo é o ambiente global. Assim, o R procura objetos que você chama na linha de tralho no ambente global.
+
+- Quando o R não encontra o objeto em um ambiente, procura por ambientes pais do ambiente, então no pai do pai, e assim por diante, até que o R encontre o objeto ou o ambiente vazio. Caso não encontre o objeto em nenhum dos ambientes, ele retornará um erro indicando que o objeto não foi encontrado.
 
 **Assignment**
 
+Quando atribuímos um valor a um objeto, o R salva o valor no ambiente ativo no nome do objeto; caso já exista um objeto com o mesmo nome, o R o substituirá:
+```
+new
+[1] "Hello Global"
+
+new <- "Hello Active"
+
+new
+[1] "Hello Active"
+```
+A mesma lógica se aplica quando criamos funções no R, sendo salvas como objetos temporários que ajudam elas a fazerem seu trabalho, como a função *roll* criada anteriormente:
+```
+roll <- function() {
+      die <- 1:6
+      dice <- sample(die, size = 2, replace = T)
+      sum(dice)
+  }
+roll()
+```
+Dessa forma, o R poderia salvar os objetos no ambiente ativo, mas se o fizesse poderia substituir objetos existentes. Para lidar com isso, o R cria um novo ambiente ativo a cada vez que roda uma função.
 
 **Evaluation**
 
+O R cria um novo ambiente a cada vez que avalia uma função para utilizá-lo enquanto roda tal função e, assim, retornado ao ambiente que você chamou a função, trazendo o resultado da função. Chamaremos este ambiente de *runtime environments* porque o R o cria no tempo em que executa a avaliação das funções. Podemos explorar essses ambientes.
+```
+
+```
 
 **Closures**
 
