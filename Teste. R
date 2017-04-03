@@ -1,0 +1,34 @@
+library(dplyr)
+zonas <- fread("C://Users//dcplab//Downloads//zonas.csv")
+zonas$id <- 1:nrow(zonas)
+secoes <- paste(zonas$V6, zonas$V7)
+secoes <- gsub("ª", "", secoes)
+secoes <- gsub("\\.", "", secoes)
+secoes <- gsub("Da", "", secoes)
+secoes <- gsub("à", "a", secoes)
+secoes <- gsub(" ", "", secoes)
+
+dados <- data.frame()
+for (i in 1:nrow(zonas)) {
+  sec <- strsplit(secoes[i], ";")
+  tabela <- data.frame(zonas$id[i], sec, stringsAsFactors = F)
+  names(tabela) <- c("id", "secao")
+  dados <- rbind(dados, tabela)
+}
+
+dados1 <- dados[grepl("a", dados$secao),]
+
+dados3 <- data.frame()
+for (i in 1:nrow(dados1)) {
+  print(i)
+  sec <- strsplit(dados1$secao[i], "a")
+  amplitude <- sec[[1]][1]:sec[[1]][2]
+  tabela <- data.frame(dados$id[i], amplitude)
+  names(tabela) <- c("id", "secao")
+  dados3 <- rbind(dados3, tabela)
+}
+
+dados2 <- dados[!grepl("a", dados$secao),]
+
+dados <- rbind(dados2, dados3)
+
