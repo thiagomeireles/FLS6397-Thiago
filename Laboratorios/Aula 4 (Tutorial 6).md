@@ -20,7 +20,7 @@ Sendo um arquivo grande (1.6 Gb), utilizaremos a função *fread* do pacote *dat
 
 ```
 library(data.table)
-lbrary(dplyr)
+library(dplyr)
 ```
 
 Vamos agora abrir os dados com a função *fread*, que vimos em tutoriais passados.
@@ -193,3 +193,143 @@ dim(saques_amostra_201701)
 ```
 
 **Transformando variáveis**
+
+Algumas variáveis, como a *valor*, podem ser lidas como texto por conterem a vírgula como separador de milhar. A função *mutate* auxilia em problemas como esse por realizar transformações nas variáveis existentes ou gerar novas. Vejamos alguns exemplos mais importantes.
+
+- Gerar uma nova variável com os nomes dos beneficiários em minúsculo usando a função *tolower*:
+
+```
+glimpse(saques_amostra_201701)
+saques_amostra_201701 <- saques_amostra_201701 %>% mutate(nome_min = tolower(nome))
+```
+
+ou, em uma forma alternativa:
+
+```{r}
+saques_amostra_201701 <- mutate(saques_amostra_201701, nome_min = tolower(nome))
+```
+
+- Em um exemplo  mais difícil, substituiremos a vírgula por um vazio em um texto e, em seguida, indicar que o texto é um número. Ou seja, em vez de criarmos uma nova variável *valor*, apenas alteraremos a já existente duas vezes. Para isso utilzaremos a função *gsub* para a substituição e a função *as.numeric* para converter o texto em número:
+
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(valor_num = gsub(",", "", valor)) %>% 
+  mutate(valor_num = as.numeric(valor_num))
+```
+
+Não é necessário utilizar a função *mutate* duas vezes, podendo ser realizada como nas duas formas abaixo:
+
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(valor_num = as.numeric(gsub(",", "", valor)))
+```
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(valor_num = gsub(",", "", valor), valor_num = as.numeric(valor_num))
+```
+
+Para ressaltar, a operação *as.character* realiza o oposto da *as.numeric*, ou seja, transforma variáveis com números em texto.
+
+- Em outro exemplo, faremos duas operações separadas que originarão duas novas variáveis: (1) dividiremos o valor por 3.2 para gerar converter o valor em dólares; e (2) somaremos R$ 10 ao valor somente para ver a transformação:
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(valor_dolar = valor / 3.2, valor10 = valor_num + 10)
+```
+
+Vejamos agora todas as novas variáveis no banco de dados:
+
+```{r}
+View(saques_amostra_201701)
+```
+
+Por enquanto vimos que operações de soma, subtração, divisão, multiplicação, módulo entre variáveis e valores são válidas e de fácil execução como nos exemplos acima. Mas não são apenas transformações matemáticas as possíveis.
+
+- Neste exemplo, converteremos a variável valor em uma nova variável que indique se o valor sacado é "Alto" (acima de R\$ 300) ou "Baixo" (Abaixo de R\$ 300) com o argumento *cut*:
+
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(valor_categorico = cut(valor_num, c(0, 300, Inf), c("Baixo", "Alto")))
+```
+
+
+- Para recodificar uma variável de texto, um pouco mais trabalhosa, utilizaremos a função *recode*. No exemplo faremos isso com a variável *mes*, a qual contém os valores 11/2016", "12/2016" e "01/2017" em nossa amostra. Geraremos uma nova variável copiando os valores da variável original e substituindo cada um dos valores pelo ano:
+
+
+```{r}
+table(saques_amostra_201701$mes)
+```
+
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(ano = mes,
+         ano = replace(ano, ano == "11/2016", "2016"),
+         ano = replace(ano, ano == "12/2016", "2016"),
+         ano = replace(ano, ano == "01/2017", "2017"))
+```
+
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(ano = recode(mes, "11/2016" = "2016", "12/2016" = "2016", "01/2017" = "2017"))
+```
+
+Assim, percebemos que basta inserir a expressão de transformação que queremos dentro da função mutate. Os argumentos *as.numeric*, *as.character*, *cut*, *replace* e *recode* permitem realizar qualquer transformação que envolva textos e números. 
+
+As variáveis *factor* são excessão por enquanto, já as vimos em tutoriais anteriores.
+
+Para expressões regulares, é recomendável a leitura do arquivo help da função *gsub*, incluindo, entre outras, *grep* e *regexpre*.
+
+
+**Exercício**
+
+Use os exemplos acima para gerar novas variáveis conforme instruções abaixo:
+
+- Faça uma nova divisão da variável "valor" a seu critério. Chame a nova variável de "valor\_categorico2".
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(valor_categorico2 = cut(valor_num, c(0, 500, Inf), c("Baixo", "Alto")))
+```
+
+- Cria uma variável "valor_euro", que é o valor calculado em Euros.
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+      mutate(valor_euro = valor / 3.3)
+```
+
+Considerando o Euro como R$ 3.20, geramos a nova variável.
+
+- Recodifique "valor\_categorico" chamando as categorias de "Abaixo de R\$300" e "Acima de R\$300". Chame a nova variável de "valor\_categorico3".
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(valor_categorico3 = recode("Baixo" = "Abaixo de R$ 300", "Alto" = "Acima de R$ 300"))
+```
+
+
+- Usando a função _recode_ Recodifique "mes" em 3 novos valores: "Novembro", "Dezembro" e "Janeiro". Chame a nova variável de "mes\_novo".
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(mes_novo = recode(mes, "11/2016" = "Novembro", "12/2016" = "Dezembro", "01/2017" = "Janeiro"))
+```
+
+- Usando a função _replace_ Recodifique "mes" em 3 novos valores: "Novembro", "Dezembro" e "Janeiro". Chame a nova variável de "mes\_novo2".
+
+```{r}
+saques_amostra_201701 <- saques_amostra_201701 %>% 
+  mutate(mes_novo2 = mes,
+         mes_novo2 = replace(mes_novo2, mes_novo2 == "11/2016", "Novembro"),
+         mes_novo2 = replace(mes_novo2, mes_novo2 == "12/2016", "Dezembro"),
+         mes_novo2 = replace(mes_novo2, mes_novo2 == "01/2017", "Janeiro"))
+```
+
+
+**Filtrando linhas**
