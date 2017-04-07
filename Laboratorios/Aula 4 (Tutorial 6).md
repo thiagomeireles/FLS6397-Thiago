@@ -104,7 +104,7 @@ Como muitas vezes obetemos dados com nomes de colunas compostos, com acentuaçã
 names(saques_amostra_201701)
 ```
 
-*Explicando a função *rename**
+**Explicando a função *rename***
 
 - O primeiro argumento é a base de dados que contém as variáveis que queremos renomear;
 
@@ -254,7 +254,6 @@ saques_amostra_201701 <- saques_amostra_201701 %>%
   mutate(valor_categorico = cut(valor_num, c(0, 300, Inf), c("Baixo", "Alto")))
 ```
 
-
 - Para recodificar uma variável de texto, um pouco mais trabalhosa, utilizaremos a função *recode*. No exemplo faremos isso com a variável *mes*, a qual contém os valores 11/2016", "12/2016" e "01/2017" em nossa amostra. Geraremos uma nova variável copiando os valores da variável original e substituindo cada um dos valores pelo ano:
 
 
@@ -379,7 +378,7 @@ saques_amostra_MT_2016 <- saques_amostra_201701 %>% filter(uf == "MT", ano == "2
 É possível combinar quantas condições forem necessárias, somente se atentando à ordem das condições se houver ambiguidade com a utilização de parênteses da mesma forma aplicada a operações aritméticas.
 
 
-*Exercício*
+**Exercício**
 
 - Crie um novo _data frame_ apenas com as observações cujo mês de competência é janeiro.
 
@@ -400,7 +399,7 @@ saques_amostra_sul <- saques_amostra_201701 %>% filter(uf == "RS" | uf == "SC" |
 ```
 
 
-*Agrupando*
+**Agrupando**
 
 A despeito de todas as transformações realizadas até agora, as unidades de análise continuaram  aser os saques realizados no nível individual. E se quisermos trabalhar em um nível mais agregado?
 
