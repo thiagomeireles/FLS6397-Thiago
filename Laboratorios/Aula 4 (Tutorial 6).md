@@ -346,13 +346,13 @@ saques_amostra_ES <-filter(saques_amostra_201701, uf == "ES")
 
 A novidade não está na função *filter*, mas na condição *uf == "ES"*, que indica a seleção das linhas da variável *uf* que possuam valor igual a *ES*.
 
-- Por que utilizar duas vezes o sinal de igualdade (==)?
+Por que utilizar duas vezes o sinal de igualdade (==)?
 
--- Utilizamos o igual para *atribuir* valores, mas aqui estamos comparando duas coisas, ou seja, verificando se o conteúdo de cada linha é igual a um valor;
+- Utilizamos o igual para *atribuir* valores, mas aqui estamos comparando duas coisas, ou seja, verificando se o conteúdo de cada linha é igual a um valor;
 
--- Outras possibildiades seriam maior (>), maior ou igual (>=), menor (<), menor ou igual (<=) e diferente (!=)
+- Outras possibildiades seriam maior (>), maior ou igual (>=), menor (<), menor ou igual (<=) e diferente (!=)
 
--- Como comparamos os valores para de cada linha a um texto, usamos as aspas no *"ES"*;
+- Como comparamos os valores para de cada linha a um texto, usamos as aspas no *"ES"*;
 
 
 Se quisermos selecionar, por exemplo, apenas os dados da região centro-Oeste, devemos atender a esse critério. No caso, geraremos um novo *data frame*:
