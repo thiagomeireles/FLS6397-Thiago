@@ -11,7 +11,65 @@ Data: "10 de abril de 2017"
 
 *1- Vá ao [Repositório de Dados Eleitorais do TSE](http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais). Faça o download do arquivo de resultados de 2016 e descompacte-o. Você pode fazer tudo à mão se tiver dificuldade de copiar o modelo do [tutorial 4](https://github.com/leobarone/FLS6397/blob/master/tutorials/tutorial4.Rmd), em que abrimos os dados da MUNIC 2005. (Nome do arquivo: "Votação nominal por município e zona")*
 
+Primeiro realizamos o download do arquivo
+
+```{r}
+url_tse <- "http://agencia.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2016.zip"
+download.file(url_tse, "2016.zip")
+```
+
+Após realizar o download, descompactamos o arquivo, conferimos a descompactação e removemos o arquivo ".zip".
+
+```{r}
+unzip("2016.zip")
+list.files()
+file.remove("2016.zip")
+```
+
+
 *2- Importe para o R os resultados eleitorais (Votação nominal por município e zona) e os dados de candidatura (Candidatos)*
+
+```{r}
+ac <- read.delim("~/votacao_candidato_munzona_2016_AC.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+al <- read.delim("~/votacao_candidato_munzona_2016_AL.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+am <- read.delim("~/votacao_candidato_munzona_2016_AM.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+ap <- read.delim("~/votacao_candidato_munzona_2016_AP.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+ba <- read.delim("~/votacao_candidato_munzona_2016_BA.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+ce <- read.delim("~/votacao_candidato_munzona_2016_CE.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+es <- read.delim("~/votacao_candidato_munzona_2016_ES.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+go <- read.delim("~/votacao_candidato_munzona_2016_GO.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+ma <- read.delim("~/votacao_candidato_munzona_2016_MA.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+mg <- read.delim("~/votacao_candidato_munzona_2016_MG.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+ms <- read.delim("~/votacao_candidato_munzona_2016_MS.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+mt <- read.delim("~/votacao_candidato_munzona_2016_MT.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+pa <- read.delim("~/votacao_candidato_munzona_2016_PA.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+pb <- read.delim("~/votacao_candidato_munzona_2016_PB.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+pe <- read.delim("~/votacao_candidato_munzona_2016_PE.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+pi <- read.delim("~/votacao_candidato_munzona_2016_PI.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+pr <- read.delim("~/votacao_candidato_munzona_2016_PR.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+rj <- read.delim("~/votacao_candidato_munzona_2016_RJ.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+rn <- read.delim("~/votacao_candidato_munzona_2016_RN.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+ro <- read.delim("~/votacao_candidato_munzona_2016_RO.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+rr <- read.delim("~/votacao_candidato_munzona_2016_RR.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+rs <- read.delim("~/votacao_candidato_munzona_2016_RS.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+sc <- read.delim("~/votacao_candidato_munzona_2016_SC.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+se <- read.delim("~/votacao_candidato_munzona_2016_SE.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+sp <- read.delim("~/votacao_candidato_munzona_2016_SP.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+to <- read.delim("~/votacao_candidato_munzona_2016_TO.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
+```
+
+Em uma forma mais elegante, podemos imprimir os arquivos no formato ".txt" da pasta padrão utilizada pelo R (aqui sabemos que somente temos os arquivos das eleições de 2016). Após isso, geramos uma lista com os 26 data frames, um para cada estado. Por fim, utilizamos o *ldply* (do pacote *plyr*, que não estava instalado em nosso computador) para agrupar a lista de data frames em um único data frame.
+
+```{r}
+estados <- paste(list.files(pattern = "txt"))
+
+lista16 <- lapply(estados, read.delim, sep=";", header=FALSE, fileEncoding = "Latin1", stringsAsFactors = F)
+
+install.packages("plyr")
+library(plyr)
+
+elec16 <- ldply(lista16, data.frame)
+```
 
 *3- Crie dois _data frames_ denominados _resultados e _candidatos_, com informações sobre votação e candidaturas dos 3 estados do sul, respectivamente.*
 
