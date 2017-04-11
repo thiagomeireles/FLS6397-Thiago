@@ -29,6 +29,15 @@ file.remove("2016.zip")
 
 *2- Importe para o R os resultados eleitorais (Votação nominal por município e zona) e os dados de candidatura (Candidatos)*
 
+Carregaremos, antes de qualquer coisa, os pacotes *data.table* e *dplyr*
+
+```{r}
+library(data.table)
+library(dplyr)
+library(readr)
+```
+
+
 ```{r}
 ac <- read.delim("~/votacao_candidato_munzona_2016_AC.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
 al <- read.delim("~/votacao_candidato_munzona_2016_AL.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
@@ -71,9 +80,40 @@ library(plyr)
 elec16 <- ldply(lista16, data.frame)
 ```
 
+Criado nosso data frame, retiraremos os arquivos utilizados para importar os dados do nosso HD.
+
+```{r}
+file.remove(estados)
+```
+
+
+
 *3- Crie dois _data frames_ denominados _resultados e _candidatos_, com informações sobre votação e candidaturas dos 3 estados do sul, respectivamente.*
 
 (Dica: use a função _rbind_ ou a função _bind\_rows_, que é o equivalente melhorado do dplyr, para juntar os _data frames_ )
+
+Podemos realizar a tarefa de duas formas. A primeira é utilizando a função *rbind* para agrupar as linhas correspondentes aos estados do Sul.
+
+```{r}
+
+```
+
+Já a segunda é extrair os dados dos estados do Sul a partir do data frame *elec16* que contém as informações dos outros 26 data frames.
+
+```{r}
+sul16 <- elec16 %>% filter(V6 == "RS" |
+                             V6 == "SC" |
+                             V6 == "PR"
+                           )
+```
+
+Selecionados os estados do Sul, geraremos dos novos data frames a partir de *sul16*, um com as informações dos resultados e outro com informações dos candidatos
+
+```{r}
+# resultados
+sul16_resultados
+```
+
 
 **Parte 2 - _data frame_ resultados**
 
