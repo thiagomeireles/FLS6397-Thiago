@@ -67,6 +67,20 @@ sp <- read.delim("~/votacao_candidato_munzona_2016_SP.txt", header = F, sep = ";
 to <- read.delim("~/votacao_candidato_munzona_2016_TO.txt", header = F, sep = ";", fileEncoding = "Latin1", stringsAsFactors = F)
 ```
 
+Unindo os dados importados em único data frame das eleições de 2016 com o *rbind*
+
+```{r}
+estados <- c(ac, al, am, ap, ba, ce, es, go, ma, mg, ms, mt, pa, pb, pe, pi, pr, rj, rn, ro, rr, rs, sc, se, sp, to)
+dados <- rbind(ac, al, am, ap, ba, ce, es, go, ma, mg, ms, mt, pa, pb, pe, pi, pr, rj, rn, ro, rr, rs, sc, se, sp, to)
+```
+
+Como faremos o mesmo de uma forma mais elegante em seguida, removeremos todos os data frames (exceto os estados do Sul que serão utilizados a frente)
+
+```{r}
+rm(ac, al, am, ap, ba, ce, es, go, ma, mg, ms, mt, pa, pb, pe, pi, rj, rn, ro, rr, se, sp, to, dados)
+```
+
+
 Em uma forma mais elegante, podemos imprimir os arquivos no formato ".txt" da pasta padrão utilizada pelo R (aqui sabemos que somente temos os arquivos das eleições de 2016). Após isso, geramos uma lista com os 26 data frames, um para cada estado. Por fim, utilizamos o *ldply* (do pacote *plyr*, que não estava instalado em nosso computador) para agrupar a lista de data frames em um único data frame.
 
 ```{r}
@@ -83,22 +97,20 @@ elec16 <- ldply(lista16, data.frame)
 Criado nosso data frame, retiraremos os arquivos utilizados para importar os dados do nosso HD.
 
 ```{r}
-file.remove(estados)
+file.remove(estados, lista16)
 ```
 
 
 
 *3- Crie dois _data frames_ denominados _resultados e _candidatos_, com informações sobre votação e candidaturas dos 3 estados do sul, respectivamente.*
 
-(Dica: use a função _rbind_ ou a função _bind\_rows_, que é o equivalente melhorado do dplyr, para juntar os _data frames_ )
-
 Podemos realizar a tarefa de duas formas. A primeira é utilizando a função *rbind* para agrupar as linhas correspondentes aos estados do Sul.
 
 ```{r}
-
+sul_16 <- rbind(pr, rs, sc)
 ```
 
-Já a segunda é extrair os dados dos estados do Sul a partir do data frame *elec16* que contém as informações dos outros 26 data frames.
+Já a segunda é extrair os dados dos estados do Sul a partir do data frame *elec16* que contém as informações dos outros 26 data frames com o auxílio do *tidyverse*.
 
 ```{r}
 sul16 <- elec16 %>% filter(V6 == "RS" |
@@ -107,11 +119,21 @@ sul16 <- elec16 %>% filter(V6 == "RS" |
                            )
 ```
 
-Selecionados os estados do Sul, geraremos dos novos data frames a partir de *sul16*, um com as informações dos resultados e outro com informações dos candidatos
+Manteremos apenas um dos data frames criados:
 
 ```{r}
+rm(sul_16)
+```
+
+Selecionados os estados do Sul, geraremos dos novos data frames vazios a partir de *sul16*, um que receberá as informações dos resultados e outro as informações dos candidatos, conforme os próximos passos.
+
+```{r}
+# candidatos
+
+sul_candidatos <- data.frame()
+
 # resultados
-sul16_resultados
+sul_resultados <- data.frame()
 ```
 
 
@@ -119,17 +141,53 @@ sul16_resultados
 
 *4- Selecione apenas as linhas que contém resultados eleitorais para prefeit@.*
 
+Selecionaremos os dados para prefeito no data frame *sul16*, o que se aplicará para a construção dos dois data frames aqui.
+
+```{r}
+sulpref <- sul16 %>% filter(V16 == "PREFEITO")
+```
+
 *5- Mantenha no banco de dados apenas as linhas que contém informações sobre UF, código do município, número do partido, número do candidat@, voto, com os seguintes nomes, respectivamente: uf, cod_munic, partido, num_cand e voto.*
 
-Se você tiver dúvida sobre as colunas e nomes das variáveis, consulte o arquivo "LEIAME.pdf" que vem em conjunto com os dados do repositório.
+Considerando que o número do partido e o número do candidato seriam a mesma variável, aplicamos a sigla do partido em substituição a "número do partido". Assim, selecionamos a partir do *codebook* (Readme.pdf) as variáveis com as informações desejadas
 
-(Dicas: use as funções _filter_, _rename_ e _select_ do pacote dplyr)
+```{r}
+sul_resultados <- sulpref %>%
+  rename(uf = V6, cod_mun = V8, part = V24, num_cand = V23, voto = V30) %>%
+  select(uf, cod_mun, part, num_cand, voto) 
+```
+
+Os exercícios 4 e 5 poderiam ser realizados em um único comando
+
+```{r}
+sul_resultados2 <- sul16 %>% filter(V16 == "PREFEITO")
+  rename(uf = V6, cod_mun = V8, part = V24, num_cand = V23, voto = V29) %>%
+  select(uf, cod_mun, part, num_cand, voto) 
+```
+
+Visto que o resultado seria o mesmo, removemos o segundo data frame para não gerar confusão no Ambiente Global:
+
+```{r}
+rm(sul_resultados2)
+```
 
 **Parte 3 - _data frame_ candidatos**
 
 *6- Selecione apenas as linhas que contém candidaturas a prefeit@.*
 
+Já selecionamos as linhas para candidaturas a prefeito no exercício *4*.
+
 *7- Mantenha no banco de dados apenas as linhas que contém informações sobre UF, número do partido, número do candidat@, descrição da ocupação, descrição do sexo e descrição de grau de instrução, com os seguintes nomes, respectivamente: uf, partido, num_cand, ocup, sexo e educ.*
+
+Selecionaremos as **colunas** com as informações solicitadas, também a partir do *codebook* citado:
+
+```{r}
+sul_candidatos <- sulpref %>%
+  rename(uf = V6, part = V24, num_cand = V23, voto = V30) %>%
+  select(uf, cod_mun, part, num_cand, voto) 
+```
+
+
 
 **Parte 4 - agregando e combinando por município**
 
