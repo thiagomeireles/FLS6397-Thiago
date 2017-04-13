@@ -137,6 +137,7 @@ Antes de realizar de uma fomra mais elegante, removeremos todos os arquivos .txt
 txt <- paste(list.files(pattern = "txt"))
 file.remove(txt)
 list.files()
+rm(txt)
 ```
 
 Em uma forma mais elegante, podemos imprimir os arquivos no formato ".txt" da pasta padrão utilizada pelo R (aqui sabemos que somente temos os arquivos das eleições de 2016). Após isso, geramos uma lista com os 26 data frames, um para cada estado. Por fim, utilizamos o *ldply* (do pacote *plyr*, que não estava instalado em nosso computador) para agrupar a lista de data frames em um único data frame.
@@ -150,7 +151,6 @@ download.file(url_resultados, "resultados.zip")
 unzip("resultados.zip")
 list.files()
 file.remove("resultados.zip")
-rm(txt)
 ```
 
 - Gerando uma lista de data frames a partir dos arquivos ".txt" para agruparmos em um único data frame posteriormente:
@@ -250,12 +250,12 @@ sulpref_resultados <- sul_resultados %>% filter(V16 == "PREFEITO")
 Considerando que o número do partido e o número do candidato seriam a mesma variável, aplicamos a sigla do partido em substituição a "número do partido". Assim, selecionamos a partir do *codebook* (Readme.pdf) as variáveis com as informações desejadas
 
 ```{r}
-sulprefeitos_resultados <- sulpref_resultados %>%
+sulprefeitos_resultados <- sulpref_resultados %>% 
   rename(uf = V6, cod_mun = V8, part = V24, num_cand = V23, voto = V29) %>%
   select(uf, cod_mun, part, num_cand, voto) 
 ```
 
-Os exercícios 4 e 5 poderiam ser realizados em um único comando
+  Os exercícios 4 e 5 poderiam ser realizados em um único comando
 
 ```{r}
 sulprefeitos_resultados2 <- sul_resultados %>% filter(V16 == "PREFEITO") %>%
@@ -286,7 +286,7 @@ Selecionaremos as **colunas** com as informações solicitadas, também a partir
 ```{r}
 sulprefeitos_candidatos <- sulpref_candidatos %>%
   rename(uf = V6, cod_mun = V7, part = V19, num_cand = V18, ocup = V26, sexo = V31, educ = V33) %>%
-  select(uf, part, num_cand, ocup, sexo, educ) 
+  select(uf, cod_mun, part, num_cand, ocup, sexo, educ) 
 ```
 
 Os exercícios 6 e 7 poderiam ser realizados em um único comando:
@@ -310,7 +310,7 @@ rm(sulprefeitos_candidatos2)
 ```{r}
 resultado_mun <- sulprefeitos_resultados %>%
   group_by(cod_mun) %>%
-  summarise(soma_votos = sum(voto))
+  summarise(votos_mun = sum(voto))
 ```
 
 *9- Combine os _data frames_ resultado e resultado\_mun usando alguma função do tipo "_join_". Chame o novo _data frame_ de _resultado_, sobrescrevendo o _data frame_ existente.*
@@ -324,7 +324,7 @@ sulprefeitos_resultados <- sulprefeitos_resultados %>%
 
 ```{r}
 sulprefeitos_resultados <- sulprefeitos_resultados %>%
-  mutate(prop_mun = (voto / soma_votos) * 100)
+  mutate(prop_mun = (voto / votos_mun))
 ```
 
 
@@ -332,31 +332,71 @@ sulprefeitos_resultados <- sulprefeitos_resultados %>%
 
 *11- Usando as funções _group\_by_ e _sumarise_, produza um novo _data frame_ que contém o total de votos pela combinação de UF e número de candidato. Chame esse novo _data frame_ de _resultado\_cand_.*
 
+A combinação de UF e número de candidato, por se tratar dos prefeitos, gerará o total de votos que o partido recebeu no estado - e não o total de votos que o candidato recebeu no estado.
+
 ```{r}
-vetor1 <- c("uf", "num_cand")
-
-sulprefeito_resultado_cand <- sulprefeitos_resultados %>%
-  group_by(uf, num_cand)) %>%
-  summarise(votos_estado = sum(votos_municipio))
+sulprefeitos_resultados_cand <- sulprefeitos_resultados %>%
+  group_by(uf, num_cand) %>%
+  summarise(votos_estado = sum(votos_mun))
 ```
-
 
 *12- Combine os _data frames_ resultado e resultado\_cand usando alguma função do tipo "_join_". Chame o novo _data frame_ de _resultado_, sobrescrevendo o _data frame_ existente. Note devemos usar um vetor no argumento "by" para combinarmos os _data frames_ por UF e número do candidato (ex: by = c("uf", "num_cand"))*
 
+```{r}
+sulprefeitos_resultados_cand <- sulprefeitos_resultados_cand %>%
+  left_join(sulprefeitos_resultados, by = c("uf", "num_cand"))
+```
+
 *13- Calcule para este novo _data frame_ uma nova variável chamada "prop_cand", que corresponde ao total de voto do candidato no município em relação ao total de votos do candidato.*
+
+Como dito no exercício 11, o a variável *prop_cand* indicará a proporção de votos que o partido recebeu no município em relação ao total de votos que o partido recebeu no estado.
+
+```{r}
+sulprefeitos_resultados_cand <- sulprefeitos_resultados_cand %>%
+  mutate(prop_est = (votos_mun / votos_estado))
+```
 
 **Parte 6 - combinando resultados e candidaturas**
 
 *14- Combine os _data frames_ resultado e candidatos usando alguma função do tipo "_join_". Chame o novo _data frame_ de _resultado_, sobrescrevendo o _data frame_ existente. . Note devemos usar um vetor no argumento "by" para combinarmos os _data frames_ por UF e número do candidato (ex: by = c("uf", "num_cand"))*
 
+Como são candidatos a prefeito, com diferentes indivíduos possuindo *num_cand* iguais em diferentes municípios, realizaremos o *join* para os dois data frames considerando as variáveis *uf*, *cod_mun* e *num_cand*. Colocaremos também a variável *part* para não ficar duplicada, uma vez que possui as mesmas informações de *num_cand*
+
+```{r}
+sulprefeitos_resultados <- left_join(sulprefeitos_resultados, sulprefeitos_candidatos, by = c("uf", "cod_mun", "num_cand", "part"))
+```
+
 **Parte 7 - treinando tabelas de resultados**
 
 *15- Produza uma tabela que indique o total de votos recebido por cada partido.*
 
+```{r}
+votos_partido <- sulprefeitos_resultados %>%
+  group_by(part) %>%
+  summarise(total_votos = sum(voto))
+```
+
 *16- Produza uma tabela com o total de votos por ocupação d@s candidat@s.*
+
+```{r}
+votos_ocup <- sulprefeitos_resultados %>%
+  group_by(ocup) %>%
+  summarise(total_votos = sum(voto))
+```
 
 *17- Produza uma tabela com o total de votos por sexo d@s candidat@s.*
 
+```{r}
+votos_sexo <- sulprefeitos_resultados %>%
+  group_by(sexo) %>%
+  summarise(total_votos = sum(voto))
+```
+
 *18- Produza uma tabela com o total de votos por grau de escolaridade d@s candidat@s.*
 
-(Dica: use as funções _group\_by_ e _sumarise_)
+```{r}
+votos_educ <- sulprefeitos_resultados %>%
+  group_by(educ) %>%
+  summarise(total_votos = sum(voto))
+```
+
