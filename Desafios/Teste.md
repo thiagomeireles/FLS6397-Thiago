@@ -4,7 +4,7 @@
 
 **negrito**
 
-1 Tópico numero
+1. Tópico numero
 
 - Tópico desordenado
 
