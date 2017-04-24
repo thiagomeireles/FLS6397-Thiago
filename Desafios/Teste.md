@@ -1,4 +1,12 @@
-# Header
+# 1 Título 1
+
+## 1.1 Subtítulo
+
+```{r}
+library(data.table)
+library(dplyr)
+library(readr)
+```
 
 *italico*
 
