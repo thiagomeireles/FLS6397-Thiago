@@ -1,0 +1,215 @@
+---
+title: "Tutorial 9"
+author: "Thiago Meireles"
+date: "22 de maio de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MySQL e dplyr
+
+Instalando e carregando os pacotes necessários:
+
+```{r}
+install.packages("RMySQL")
+library(RMySQL)
+library(dplyr)
+```
+
+Passo importante: fazer a conexão com a base SQL. No exemplo a seguir, que não funcionará, carregaríamos uma base no servidor local (próprio computador) e que o banco de possuísse a tabela "transferencias201701". Serão utilizados usuário e senha fictícios (**root** e **pass**),bem como a função **src_mysql** para criar um objeto de "conexão", **by_mysql**.
+
+```{r}
+conexao <- src_mysql(dbname = "PBF", 
+                   user = "root",
+                   password = "pass")
+```
+
+Após isso, criaríamos uma tabela com conexão direta à "transferencias201701" do banco de dados do PGF.
+
+```{r}
+tabela <- tbl(conexao, "pagamentos201701")
+```
+
+"NOTA IMPORTANTE: nos testes que fizemos em sala de aula com uma conexão a um servidor PostgreSQL, tivemos que substituir o nome da tabela por um "statment" de SQL (veja Issue 244 no repo do dplyr para a solução). Vamos supor que nossa tabela tenha o nome "tabela" e esteja num schema denominado "schema". Para repetir o comando acima neste caso fazemos:
+
+```{r}
+tabela <- tbl(conexao, sql("SELECT * FROM schema.tabela"))
+```
+
+Simples, não? A partir deste ponto, basta trabalhar com objeto "tabela" da mesma maneira que trabalhamos data frames até agora. A gramática oferecida pelo pacote dplyr funciona normalmente e, quando quisermos, podemos exportar os dados com os métodos acima."
+
+## Vôos em atraso - um exemplo do site Datacamp
+
+Será utilizado um exemplo do Datacamp, com seu servidor remoto MySQL que possui um banco chamado **dplyr** que possui uma tabela com o mesmo nome com informações sobre vôos de companhias aéreas. 
+
+Um primeiro passo é estabelecer a conexão com o servidor e o banco de dados, como no exemplo fictício anterior. No entanto, temos a diferença de estar lidando com um servidor remoto, sendo necessário indicar seu "endereço" com os argumentos **host** e **port**, fornecidos pelos criadores do site, além do nome do banco, usuário e senha (**student** e **datacamp**, respectivamente).
+
+
+```{r}
+conexao <- src_mysql(dbname = "dplyr", 
+                     host = "courses.csrrinzqubik.us-east-1.rds.amazonaws.com", 
+                     port = 3306, 
+                     user = "student",
+                     password = "datacamp")
+```
+
+Para observar as tabelas da base de dados:
+
+```{r}
+src_tbls(conexao)
+```
+
+Após conectar ao servidor, fazemos a conexão direta com a tabela que nos interessa (**dplyr**), criando um objeto chamado **voos**.
+
+```{r}
+voos <- tbl(conexao, "dplyr")
+```
+
+Após examinar o conteúdo (com **str**, **head**, etc.), criaremos a variável **atraso**, soma das variáveis atraso de partidas e de chegadas de cada vôo (**dep_delay** e **arr_delay**), agrupando por companhia aérea (**carrier**) e calcular a soma agregada dos atrasos de cada companhia, armazenando no objeto **voos_atraso**.
+
+```{r}
+voos_atraso <- voos %>% 
+  mutate(atraso =  dep_delay + arr_delay) %>%
+  group_by(carrier) %>%
+  summarise(total_atraso = sum(atraso))
+```
+
+## Tradução dplyr-SQL
+
+Para traduzir o comando acima de SQL para R utilizamos a função **show_query**, sendo o **output** a query equivalente para produzir o mesmo resultado no MySQL
+Podemos traduzir, literalmente, o comando acima para a linguagem de R para SQL como a função show_query. O output, impresso no console, é a query equivalente que deveríamos produzir no MySQL para executar a mesma tarefa.
+
+```{r}
+show_query(voos_atraso)
+```
+
+## Outras bases de dados
+
+Para as bases de dados MariaDb, SQLite, PostgreSQL e BigQuery utilizamos, respectivamente, as funções **scr_mysql**, **scr_sqlite**, **scr_postgres**, **scr_bigquery** com os mesmos argumento utilizados acima: **dbname**, **host**, **port**, **user** e **password**. A linguagem para manipulação do **dplyr** funciona normalmente nas tabelas desses servidores.
+
+## Um exemplo com mais de uma tabela
+
+Aqui tambéms será utilizado um servidor MySQL do Datacamp para trabalhar com mais de uma tabela, sendo que começamos pela conexão:
+
+```{r}
+conexao <- src_mysql(dbname = "tweater", 
+                   host = "courses.csrrinzqubik.us-east-1.rds.amazonaws.com", 
+                   port = 3306, 
+                   user = "student",
+                   password = "datacamp")
+```
+
+src_tables fornece a listagem de tabelas na base de dados.
+
+```{r}
+src_tbls(conexao)
+```
+
+São 3 tabelas distintas
+Nessa base de dados há 3 tabelas com informações provenientes de uma rede social: "users", que é uma tabela de usuários; "tweats" com informações sobre postagens de usuários; e "comments", com comentários às postagens por outros usuários.
+
+Se você sabe algo de SQL, pode usar a função tbl permite fazer queries em linguagem SQL. Por exemplo.
+
+```{r}
+tbl(conexao, sql("SELECT * FROM comments WHERE user_id > 4"))
+```
+
+Mas queremos evitar o uso da linguagem SQL. Com tbl, criamos um objeto de tabela que seja manipulável com as funções do dplyr, sem, no entanto, importá-la. Vamos fazer isso para as três tabelas da base de dados que estamos usando:
+
+```{r}
+comments <- tbl(conexao, "comments")
+tweats <- tbl(conexao, "tweats")
+users <- tbl(conexao, "users")
+```
+
+Repetindo a query acima, em que selecionamos na tabela comments apenas as linhas com user_id > 4:
+
+```{r}
+filter(comments, user_id > 4)
+```
+
+A partir de agora, as funções de manipulação de dados do dplyr são aplicáveis aos novos objetos criados para representar as tabelas que estão no servidor. Por exemplo, vamos renomear a variável "id" em tweats para "tweat_id" e fazer um left join entre comments e tweats por "tweat_id":
+
+```{r}
+tweats2 <- rename(tweats, tweat_id = id)
+tabela_join <- left_join(tweats2, comments, "tweat_id")
+head(tabela_join)
+```
+
+Note que "tweats2" é uma tabela gerada no servidor de SQL e não está na memória RAM de nosso computador.
+
+Novamente, podemos traduzir a query de R para SQL:
+
+```{r}
+show_query(tabela_join)
+```
+
+As funções da gramática do dplyr -- filter, select, rename, mutate, group_by, summarize, left_join, right_join, inner_join, full_join e etc -- funcionam normalmente à tabelas remotas e facilitam demais a manipulação. Um exemplo tolo, porém completo, usando o operador %>% ( pipe, que permite omitir o primeiro argumento de cada função e nos poupa de repetir o nome da tabela diversas vezes) para ilustrar a aplicação de diversas funções do dplyr ao mesmo tempo:
+
+```{r}
+tweats <- tweats %>% 
+  rename(tweat_id = id) %>%              # renomeia variavel
+  mutate(post = toupper(post)) %>%       # post em letras maiusculas
+  left_join(comments, "tweat_id") %>%    # left join con tabela "comments"
+  select(tweat_id, post, message) %>%    # mantem apenas 3 variaveis
+  filter(substr(message, 
+                nchar(message), 
+                nchar(message)) == "!")  # filtra por comentarios que terminam em !
+head(tweats, 7)
+```
+
+Uma maneira simples de trazer à memória de seu computador a tabela gerada a partir da query, com as.data.frame importamos a tabela como data frame:
+
+```{r}
+tabela <- as.data.frame(tweats)
+```
+
+Note que "tabela", diferentemente de "tweats", é um data frame no seu workspace.
+
+## Tabelas temporárias versus criação de tabelas no MySQL
+
+Quando utilizamos os verbos do dplyr para manipulação de dados em servidor MySQL, todas as consultas são geradas como tabelas temporárias no servidor. Como fazer com que as consultas se tornem tabelas permanentes no servidor?
+
+Vamos trabalhar com um servidor fictício, pois não temos permissão para gerar tabelas no servidor que utilizamos como exemplo no tutorial. Vamos supor que temos uma tabela "pagamentos201701" na nossa base de dados "PBF" e que tal tabela contém uma variável "UF" para unidades da federação:
+
+```{r}
+conexao <- src_mysql(dbname = "PBF", 
+                   user = "root",
+                   password = "pass")
+tabela <- tbl(conexao, "pagamentos201701")
+minha_query <- tabela %>% filter(UF == "ES")
+```
+
+Ao produzir o comando acima, na prática, nada aconteceu. A execução da query só ocorrerá quando tentarmos trazer a tabela para a memória ("fetch") ou explicitarmos que ela deve ser computada.
+
+Se quisermos trazer os dados para a memória, utilizamos a função collect.
+
+```{r}
+pagamentos_es <- collect(minha_query)
+```
+
+Ao usar o comando collect, a query é executada no servidor e os dados enviados ao R.
+
+O caminho inverso -- subir ao servidor uma tabela -- é feito com a função copy_to
+
+```{r}
+copy_to(dest = conexao, df = pagamentos_es, name = "pagamentos201701_es")
+```
+
+No entanto, copy_to não geram uma nova tabela no servidor. Para que uma nova tabela seja gerada, é preciso definir o argumento "temporary" como "FALSE" (o padrão é "TRUE"):
+
+```{r}
+copy_to(dest = conexao, df = pagamentos_es, name = "pagamentos201701_es", temporary = FALSE)
+```
+
+Para executar a query no servidor sem que precisemos trazer a tabela e reenviá-la devemos usar a função compute, que também tem o argumento "temporary".
+
+```{r}
+compute(minha_query, name = "pagamentos201701_es", temporary = FALSE)
+```
+
+
+Sem definir "temporary" como "FALSE", a query será executada e a tabela gerada será temporária, apenas.
